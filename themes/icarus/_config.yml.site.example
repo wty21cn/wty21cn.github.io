@@ -3,22 +3,22 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Tianyu Wang's Blog
+title: Icarus
 subtitle:
-description: Tianyu Wang's Blog
-author: Tianyu Wang
-author_title: "Network Engineer & Developer"
+description: Hexo theme - Icarus
+author: PPOffice
+author_title: 'Web Developer & Designer'
 avatar: css/images/avatar.png
-location: 'Beijing, China'
-follow: https://github.com/wty21cn/
+location: 'Harbin, China'
+follow: https://github.com/ppoffice/
 language: en
-timezone: Asia/Shanghai
-since: 2015 # The start year showing in your copyright section.
+timezone:
+since: 2000 # The start year showing in your copyright section.
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://wty.im
-root: /
+url: http://ppoffice.github.io/hexo-theme-icarus
+root: /hexo-theme-icarus/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -61,7 +61,7 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 8
+per_page: 6
 pagination_dir: page
 
 # Extensions
@@ -69,16 +69,8 @@ pagination_dir: page
 ## Themes: https://github.com/hexojs/hexo/wiki/Themes
 theme: icarus
 
-feed:
-  type: atom
-  path: atom.xml
-  limit: false
-
-sitemap:
-  path: sitemap.xml
-
 # Disqus
-disqus_shortname: wty21cn
+# disqus_shortname: hexo-theme-icarus
 
 # DuoShuo
 # duoshuo_shortname: hexo-theme-icarus
@@ -88,5 +80,5 @@ disqus_shortname: wty21cn
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/wty21cn/wty21cn.github.io.git
-  branch: master
+  repository: https://github.com/ppoffice/hexo-theme-icarus.git
+  branch: gh-pages
