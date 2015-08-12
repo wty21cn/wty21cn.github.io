@@ -2,6 +2,10 @@
 <% if (config.disqus_shortname){ %>
 <script>
   var disqus_shortname = '<%= config.disqus_shortname %>';
+  var disqus_url = '<%- url_for(url) %>';
+  <% if (page.identifier) { %>
+  var disqus_identifier = '<%- page.identifier %>';
+  <% } %>
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
