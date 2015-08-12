@@ -1,7 +1,8 @@
 category: Tech
-tag: Git
 date: 2015-08-12
+tag: Git
 identifier: 创建Git独立分支
+cc: true
 title: 创建Git独立分支
 ---
 在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
