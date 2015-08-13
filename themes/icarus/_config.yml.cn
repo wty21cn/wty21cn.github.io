@@ -25,7 +25,7 @@ widgets:
 - recent_posts
 #- category
 #- tag
-- tagcloud
+#- tagcloud
 #- archive
 - links
 thumbnail: false 
@@ -42,6 +42,10 @@ contacts:
 # Links
 links:
 #  Hexo: http://hexo.io
+
+# Search Engine
+google: false
+swiftype: true
 
 # Miscellaneous
 google_analytics:

@@ -38,6 +38,10 @@ contacts:
   twitter: http://twitter.com/wty21cn
   rss: atom.xml
 
+# Search Engine
+goolge: false
+swiftype: true
+
 # Links
 links:
 #  Hexo: http://hexo.io
