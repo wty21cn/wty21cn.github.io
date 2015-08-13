@@ -9,12 +9,16 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
+        <a href=<%= url_for('/archives/') %>>
         <%= site.posts.length %>
         <span><%= (site.posts.length > 1 ? __('profile.posts') : __('profile.post')) %></span>
+        </a>
       </div>
       <div class="article-info-block">
+        <a href=<%= url_for('/tags/') %>>
         <%= site.tags.length %>
         <span><%= (site.tags.length > 1 ? __('profile.tags') : __('profile.tag')) %></span>
+        </a>
       </div>
     </div>
     <% if(theme.contacts) { %>
