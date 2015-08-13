@@ -90,3 +90,7 @@ deploy:
   type: git
   repository: https://github.com/wty21cn/wty21cn.github.io.git
   branch: master
+
+html-minifier:
+  exclude:
+
