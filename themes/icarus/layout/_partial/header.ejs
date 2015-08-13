@@ -15,7 +15,14 @@
         </nav>
       <% } %>
       <div id="search-form-wrap">
+       <% if (theme.google){ %>
         <%- search_form({button: ' '}) %>
+       <% } %>
+       <% if (theme.swiftype){ %>
+        <form accept-charset="UTF-8" class="search-form">
+          <input type="text" class="st-default-search-input" placeholder="Search">
+        </form>
+       <% } %>
       </div>
     </div>
   </div>
@@ -26,7 +33,14 @@
           <td><a class="main-nav-link" href="<%- url_for(theme.menu[i]) %>"><%= i %></a></td>
         <% } %>
         <td>
-          <%- search_form() %>
+          <% if (theme.google){ %>
+              <%- search_form() %>
+          <% } %>
+          <% if (theme.swiftype){ %>
+             <form accept-charset="UTF-8" class="search-form">
+                <input type="text" class="st-default-search-input" placeholder="Search">
+             </form>
+          <% } %>
         </td>
       </tr>
     </table>
