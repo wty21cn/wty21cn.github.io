@@ -13,6 +13,6 @@ title: 关于
 |       |       |       |       |
 |:-----:|:-----:|:-----:|:-----:|
 |新浪微博|GitHub|Linkdin|Email|
-|[<font size=10><i class="fa fa-weibo"></i></font>](http://weibo.com/wty21cn)|[<font size=10><i class="fa fa-github"></i></font>](http://github.com/wty21cn)|[<font size=10><i class="fa fa-linkedin"></i></font>](https://cn.linkedin.com/in/wty21cn)|[<font size=10><i class="fa fa-envelope-o"></i></font>](mailto:wty21cn@163.com)|
+|[<font size=10><i class="fa fa-weibo"></i></font>](http://weibo.com/wty21cn)|[<font size=10><i class="fa fa-github"></i></font>](http://github.com/wty21cn)|[<font size=10><i class="fa fa-linkedin"></i></font>](https://www.linkedin.com/in/wty21cn)|[<font size=10><i class="fa fa-envelope-o"></i></font>](mailto:wty21cn@163.com)|
 	
  
