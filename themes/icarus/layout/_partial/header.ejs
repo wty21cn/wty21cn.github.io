@@ -19,9 +19,10 @@
         <%- search_form({button: ' '}) %>
        <% } %>
        <% if (theme.swiftype){ %>
-        <form accept-charset="UTF-8" class="search-form">
-          <input type="text" class="st-default-search-input" placeholder="Search">
-        </form>
+         <form accept-charset="UTF-8" class="search-form">
+            <input type="search" class="search-form-input" placeholder="Search">
+            <button type="submit" class="search-form-submit"> </button>
+         </form>
        <% } %>
       </div>
     </div>
@@ -38,7 +39,7 @@
           <% } %>
           <% if (theme.swiftype){ %>
              <form accept-charset="UTF-8" class="search-form">
-                <input type="text" class="st-default-search-input" placeholder="Search">
+                <input type="text" class="search-form-input" placeholder="Search">
              </form>
           <% } %>
         </td>
