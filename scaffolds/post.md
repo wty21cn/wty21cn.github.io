@@ -1,6 +1,6 @@
 date: {{ date }}
 tags:
-categry:
+category:
 identifier: {{ title }}
 cc: true
 toc: true
