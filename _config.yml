@@ -89,7 +89,7 @@ disqus_shortname: wty21cn
 deploy:
   type: git
   repository: git@gitcafe.com:wty21cn/wty21cn.git
-  branch: master
+  branch: gitcafe-pages 
 
 html-minifier:
   exclude:
