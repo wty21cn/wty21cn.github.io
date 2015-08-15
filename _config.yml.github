@@ -88,7 +88,7 @@ disqus_shortname: wty21cn
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@gitcafe.com:wty21cn/wty21cn.git
+  repository: https://github.com/wty21cn/wty21cn.github.io.git
   branch: master
 
 html-minifier:
