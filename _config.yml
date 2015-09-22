@@ -91,6 +91,5 @@ deploy:
   repository: git@gitcafe.com:wty21cn/wty21cn.git
   branch: gitcafe-pages 
 
-html-minifier:
-  exclude:
+
 
