@@ -78,10 +78,10 @@ sitemap:
   path: sitemap.xml
 
 # Disqus
-disqus_shortname: wty21cn
+#disqus_shortname: wty21cn
 
 # DuoShuo
-# duoshuo_shortname: hexo-theme-icarus
+duoshuo_shortname: hexo-theme-icarus
 
 
 # Deployment
