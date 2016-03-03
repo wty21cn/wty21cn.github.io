@@ -4,15 +4,15 @@
 
 # Site
 title: 王天雨的博客
-subtitle:
-description:
+subtitle: 
+description: 生命不息，编程不止
 author: 王天雨
 language: zh-Hans
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://wty.im
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -26,6 +26,13 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+
+#feed
+feed:
+  type: atom
+  path: atom.xml
+  limit: 0
+  hub:
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -60,6 +67,12 @@ time_format: HH:mm:ss
 per_page: 10
 pagination_dir: page
 
+# title, chinese available
+links_title: Links
+# links
+links:
+  MacTalk: http://macshuo.com/
+
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
@@ -68,4 +81,6 @@ theme: next
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: git@gitcafe.com:wty21cn/wty21cn.git
+  branch: gitcafe-pages
