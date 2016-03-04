@@ -1,0 +1,896 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="rc-file,dotfile,rcm,linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="王天雨的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.png?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。
+当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希">
+<meta property="og:type" content="article">
+<meta property="og:title" content="管理linux下软件的配置文件dotfile(rc files)">
+<meta property="og:url" content="http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/index.html">
+<meta property="og:site_name" content="王天雨的博客">
+<meta property="og:description" content="在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。
+当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希">
+<meta property="og:updated_time" content="2016-03-03T06:12:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="管理linux下软件的配置文件dotfile(rc files)">
+<meta name="twitter:description" content="在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。
+当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 管理linux下软件的配置文件dotfile(rc files) | 王天雨的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?85674fa54b3a2737ca04585949aa5781";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">王天雨的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                管理linux下软件的配置文件dotfile(rc files)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-08-14T21:57:05+08:00" content="2015-08-14">
+              2015-08-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。</p>
+<p>当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希望在新电脑上恢复多个软件配置或者在多台电脑上共享一台电脑对dotfile的修改时，逐一对各个dotfile进行管理非常不方便。</p>
+<p>所以我来介绍一下我管理dotfile的方式<a id="more"></a></p>
+<h2 id="所需软件介绍"><a href="#所需软件介绍" class="headerlink" title="所需软件介绍"></a>所需软件介绍</h2><p>我在管理dotfile时用到的软件是在Github上开源的<a href="https://github.com/thoughtbot/rcm" target="_blank" rel="external">rc file management(rcm)软件</a>，这个软件主要思想就是将所有你希望用rcm管理的dotfile移动并集中存储在一个目录中（默认是在~/.dotflies下），并在你的个人目录下创建所有被rcm管理的dotfile的符号连接(symlink)。如果你熟悉这个软件可以看看<a href="/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/#我的日常使用方法">我的日常使用方法</a>。</p>
+<p>我们可以在该集中存储目录下建立git repository进行版本控制，同时也可托管到github或gitcafe上方便多台机器共享。当你希望使用别人分享给你的rcm目录下的dotfile时则rcm可以利用多目录存储管理功能，同时调用多个分享目录下的文件。</p>
+<p>这套软件主要包括了一下4个命令和一个配置dotfile文件~/.rcrc(注意在安装好rcm后不会有配置文件，若要使用需手动创建）</p>
+<ul>
+<li><code>lsrc</code>：列出当前所有通过rcm管理的dotfile，以及其对应的符号链接位置</li>
+<li><code>mkrc</code>：将指定的dotfile移动至你的集中存储目录，并在~/目录下创建相应的符号链接</li>
+<li><code>rcup</code>：根据rcm管理的dotfiles更新当前用户目录下已存在的符号链接或创建新的符号链接</li>
+<li><code>rcdn</code>：删除通过rcm创建的dotfile的符号链接</li>
+</ul>
+<h2 id="安装RCM"><a href="#安装RCM" class="headerlink" title="安装RCM"></a>安装RCM</h2><p>我主要是用Mac和Ubuntu，他们的安装方法如下</p>
+<h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap thoughtbot/formulae</span><br><span class="line">brew install rcm</span><br></pre></td></tr></table></figure>
+<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:martin-frost/thoughtbot-rcm</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install rcm</span><br></pre></td></tr></table></figure>
+<h3 id="Arch-Linux"><a href="#Arch-Linux" class="headerlink" title="Arch Linux"></a>Arch Linux</h3><p><a href="https://aur.archlinux.org/packages/rcm/" target="_blank" rel="external">https://aur.archlinux.org/packages/rcm/</a></p>
+<h3 id="Debian-based"><a href="#Debian-based" class="headerlink" title="Debian-based"></a>Debian-based</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://thoughtbot.github.io/rcm/debs/rcm_1.2.3-1_all.deb</span><br><span class="line">sha=$(sha256sum rcm_1.2.3-1_all.deb | cut <span class="_">-f</span>1 <span class="_">-d</span><span class="string">' '</span>)</span><br><span class="line">[ <span class="string">"<span class="variable">$sha</span>"</span> = <span class="string">"fb8ec2611cd4d519965b66fcf950bd93d7593773659f83a8612053217daa38b4"</span> ] &amp;&amp; \</span><br><span class="line">sudo dpkg -i rcm_1.2.3-1_all.deb</span><br></pre></td></tr></table></figure>
+<h3 id="Gentoo-based-including-Funtoo"><a href="#Gentoo-based-including-Funtoo" class="headerlink" title="Gentoo-based (including Funtoo)"></a>Gentoo-based (including Funtoo)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo emerge layman</span><br><span class="line">sudo layman <span class="_">-f</span> --overlays https://github.com/bronislav/overlays/raw/master/layman.xml --add bronislav</span><br><span class="line">sudo emerge rcm</span><br></pre></td></tr></table></figure>
+<h3 id="OpenBSD-current"><a href="#OpenBSD-current" class="headerlink" title="OpenBSD(-current)"></a>OpenBSD(-current)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkg_add rcm</span><br></pre></td></tr></table></figure>
+<h3 id="openSUSE-RHEL-CentOS"><a href="#openSUSE-RHEL-CentOS" class="headerlink" title="openSUSE/RHEL/CentOS"></a>openSUSE/RHEL/CentOS</h3><p><a href="http://software.opensuse.org/download.html?project=utilities&amp;package=rcm" target="_blank" rel="external">http://software.opensuse.org/download.html?project=utilities&amp;package=rcm</a></p>
+<h3 id="其他Linux发行版"><a href="#其他Linux发行版" class="headerlink" title="其他Linux发行版"></a>其他Linux发行版</h3><p>这个软件使用了标准GNU autotools，可以尝试一下方法编译安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.2.3.tar.gz &amp;&amp; \</span><br><span class="line"></span><br><span class="line">sha=$(sha256 rcm-1.2.3.tar.gz | cut <span class="_">-f</span>1 <span class="_">-d</span><span class="string">' '</span>) &amp;&amp; \</span><br><span class="line">[ <span class="string">"<span class="variable">$sha</span>"</span> = <span class="string">"502fd44e567ed0cfd00fb89ccc257dac8d6eb5d003f121299b5294c01665973f"</span> ] &amp;&amp; \</span><br><span class="line"></span><br><span class="line">tar -xvf rcm-1.2.3.tar.gz &amp;&amp; \</span><br><span class="line"><span class="built_in">cd</span> rcm-1.2.3 &amp;&amp; \</span><br><span class="line"></span><br><span class="line">./configure &amp;&amp; \</span><br><span class="line">make &amp;&amp; \</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h2 id="RCM使用方法"><a href="#RCM使用方法" class="headerlink" title="RCM使用方法"></a>RCM使用方法</h2><p>接下来介绍一下我的使用方式</p>
+<h3 id="通过mkrc命令创建Dotfiles管理目录"><a href="#通过mkrc命令创建Dotfiles管理目录" class="headerlink" title="通过mkrc命令创建Dotfiles管理目录"></a>通过mkrc命令创建Dotfiles管理目录</h3><p>如果你是第一次在本地使用rcm，则可以通过mkrc命令来创建dotfiles管理目录，并指定要用使用rcm管理哪些文件.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkrc .zshrc .zsh-custom</span><br></pre></td></tr></table></figure>
+<p>命令执行完毕后，会将你指定的dotfile默认移动到~/.dotfiles目录下并重命名将文件名前的“.”去掉，同时在~/目录下创建相应的符号链接，如果你的dotfile是存储在某个文件夹下时，例如~/.example/config, 则程序会将文件拷贝至~/.dotfiles/example/config，并在原目录中创建符号连接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="_">-l</span> ~/dotfiles</span><br><span class="line"> -rw-r--r--  1 Rain staff 1065 8 15 13:20 zshrc</span><br><span class="line"> drwxr-xr-x  3 Rain staff 102B 8 15 13:20 zsh-custom</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">ls <span class="_">-l</span> .zshrc</span><br><span class="line"> lrwxr-xr-x  1 Rain staff 35B 8 15 13:20 .zshrc -&gt; /Users/Rain/.dotfiles/zshrc</span><br><span class="line"></span><br><span class="line">ls <span class="_">-l</span> .zsh-custom/themes/wty.zsh-theme </span><br><span class="line"> lrwxr-xr-x  1 Rain staff 61 8 15 13:20 .zsh-custom/themes/wty.zsh-theme -&gt; /Users/Rain/.dotfiles/tag-zsh/zsh-custom/themes/wty.zsh-theme</span><br></pre></td></tr></table></figure>
+<p>此时你可以使用git在~/.dotfiles目录下创建仓库进行版本管理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.dotfiles</span><br><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"These are my config dotfiles"</span> &gt;&gt; README.md</span><br><span class="line">git commit -m <span class="string">"initial commit"</span></span><br></pre></td></tr></table></figure>
+<p>如果你希望更改创建的dotfiles管理目录的位置，可以通过在mkrc命令中带上-d参数，或者<br>在~/.rcrc配置文件中配置默认的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkrc <span class="_">-d</span> ~/.mydotfiles .zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#in ~/.rcrc file</span></span><br><span class="line"><span class="comment">#此参数可以设置多个目录，为其余几个命令服务，对mkrc命令来说第一个目录为默认目录,若不填写则~/.dotfiles为默认目录</span></span><br><span class="line">DOTFILES_DIRS=<span class="string">"~/.mydotfiles"</span></span><br></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p><strong><code>由于rcm软件的设计问题，请勿对已经由rcm管理并创建的符号连接使用mkrc命令，否则会让~/.dotfiles下的文件变成指向自己的符号链接并丢失源文件。</code></strong></p>
+<p>为了避免符号链接带来的问题，我们可以在使用mkrc命令时带上“-C”参数来改变创建符号链接的行为，或者在~/.rcrc文件中加入如下参数，将所有创建符号链接的行为都改为拷贝，这个将影响所有的rcm命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#in ~/.rcrc files</span></span><br><span class="line">COPY_ALWAYS=<span class="string">"*"</span></span><br><span class="line"></span><br><span class="line">mkrc -C .zshrc</span><br></pre></td></tr></table></figure>
+<p>我最开始尝试使用这个软件的时候因为这个问题导致丢失了.zshrc，而且并未备份，又得重新配置一遍，幸好有<a href="http://ohmyz.sh/" target="_blank" rel="external">oh-my-zsh</a>，Orz..</p>
+<p><code>但是使用符号链接的好处就是当你对~目录下我的dotfile进行修改时，相当于直接对dotfiles管理目录中的文件进行了修改，这样备份更加方便</code>，我认为只要小心一点还是符号链接更加方便，如何取舍就看大家啦。</p>
+<h3 id="mkrc命令高级用法"><a href="#mkrc命令高级用法" class="headerlink" title="mkrc命令高级用法"></a>mkrc命令高级用法</h3><p>mkrc命令还支持将dotfiles通过tags分类存放，可以方便的对不同软件的配置文件进行分类管理，比如通过如下命令创建dotfiles管理目录,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir -t zsh .zshrc</span><br></pre></td></tr></table></figure>
+<p>此命令将会在./dotfiles目录下创建以“tag-”开头的目录，效果如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls <span class="_">-l</span> ~/.dotfiles/tag-zsh/zshrc                                                </span><br><span class="line"> -rw-------  1 Rain  staff  1065  8 15 15:42 .dotfiles/tag-zsh/zshrc</span><br></pre></td></tr></table></figure>
+<p>mkrc还能根据hostname来进行分类管理，mkrc的更多参数请查看man page <a href="http://thoughtbot.github.io/rcm/mkrc.1.html" target="_blank" rel="external">mkrc(1)</a><br>在使用了mkrc的分类管理参数后会影响到接下来要介绍的rcup命令的行为</p>
+<h3 id="通过rcup命令更新dotfiles"><a href="#通过rcup命令更新dotfiles" class="headerlink" title="通过rcup命令更新dotfiles"></a>通过rcup命令更新dotfiles</h3><h4 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h4><p>当你没有使用任何分类管理参数时，你的所有dotfile应该都存储在~/.dotfiles目录下，此时你只需要简单的执行rcup命令，则rcm会在~目录下创建所有~/.dotfiles下文件对应的符号链接，当配置了COPY_ALWAYS=“*”时则会改为拷贝，若~目录下存在对应文件且内容不同时，会提示是否覆盖。且若~、。dotfiles中的文件夹在~中不存在时会自动创建，样例如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rcup -v   </span><br><span class="line"> identical /Users/Rain/.rcrc</span><br><span class="line"> <span class="string">'~/.dotfiles/tag-zsh/zsh-custom/themes/wty.zsh-theme'</span> -&gt; <span class="string">'~/.zsh-custom/themes/wty.zsh-theme'</span></span><br><span class="line"> overwrite /Users/Rain/.zshrc? [ynaq] y</span><br><span class="line"> removed <span class="string">'/Users/Rain/.zshrc'</span></span><br><span class="line"> <span class="string">'/Users/Rain/.dotfile/zshrc'</span> -&gt; <span class="string">'/Users/Rain/.zshrc'</span></span><br></pre></td></tr></table></figure>
+<h4 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h4><p>当不加任何参数时，rcup默认只将没有通过tag进行分类的且如果通过hostname分类了则分类hostname与本地hostname相同的dotfiles更新至你的~目录</p>
+<p>当你使用tag来构建你的dotefile目录时，你可以通过给rcup命令加上“-t”参数或者在~/.rcrc中配置TAGS=”tag1 tag2”来更新相应分类下的dotfiles，或者加上“-B”参数来指定一个hostname或在~/.rcrc文件中配置HOSTNAME参数，从而取消自动计算hostname。</p>
+<p><code>如果加了“-t”参数以后，lsrc，rcup和rcdn命令都只会加载没有用tag分类的和“-t”参数给出的tag相关的dotfile，其他tag下的dotfiles不会被加载</code></p>
+<p>你可以通过lsrc命令查看当前rcup命令能作用于哪些dotfiles，如果要查询有哪些tag，只需进入~/.dotfiles目录查看那些以“tag-”开头的目录即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lsrc</span><br><span class="line"> /Users/Rain/.rcrc:/Users/Rain/.dotfiles/rcrc</span><br><span class="line"></span><br><span class="line">lsrc -t zsh</span><br><span class="line"> /Users/Rain/.rcrc:/Users/Rain/.dotfiles/rcrc</span><br><span class="line"> /Users/Rain/.zshrc:/Users/Rain/.dotfiles/tag-zsh/zshrc</span><br><span class="line"></span><br><span class="line">rcup -v -t zsh</span><br><span class="line"> identical /Users/Rain/.rcrc</span><br><span class="line"> <span class="string">'/Users/Rain/.dotfiles/tag-zsh/zshrc'</span> -&gt; <span class="string">'/Users/Rain/.zshrc'</span></span><br></pre></td></tr></table></figure>
+<p>当你希望rcup同时载入多个dotfiles管理目录，比如当你使用他人分享给你的通过rcm创建的dotfiles管理目录时，你可以使用rcup的“-d”参数来指定从哪个文件夹来更新~目录下的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rcup <span class="_">-d</span> ~/.SarahDotfiles -t zsh</span><br><span class="line"> <span class="string">'/Users/Rain/Download/.SarahDotfiles/tag-zsh/zshrc'</span> -&gt; <span class="string">'/Users/Rain/.zshrc'</span></span><br></pre></td></tr></table></figure>
+<h2 id="我的日常使用方法"><a href="#我的日常使用方法" class="headerlink" title="我的日常使用方法"></a>我的日常使用方法</h2><p>一般我的使用方法是，使用一个dotfiles管理目录统一管理dotfiles，并在该目录里建立git repository进行版本控制</p>
+<p>其中</p>
+<ul>
+<li>rcm的配置dotfiles .rcrc以tag rcm分类</li>
+<li>同一个软件的所有dotfile配置文件都通过一个tag来分类管理</li>
+<li>在.rcrc中配置TAGS=“所有以用于分类的tags”</li>
+<li>在.rcrc中配置EXCLUDES=”忽略dotfiles管理目录中的某些文件”，比如github的README.md等</li>
+</ul>
+<p>当迁移到新的电脑上时，将dotfiles管理目录放置于~/.dotfiles，并采用如下方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.恢复rcm的dotfile</span></span><br><span class="line">rcup -t rcm</span><br><span class="line"></span><br><span class="line"><span class="comment">#2.查看当前有哪些可以恢复的dotfiles</span></span><br><span class="line">lsrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.因为.rcrc配置中已经配置了原电脑所有的分类，则可以直接全部恢复</span></span><br><span class="line">rcup</span><br><span class="line"></span><br><span class="line"><span class="comment">#4.若只想部分恢复，则指定tag</span></span><br><span class="line">rcup -t zsh</span><br></pre></td></tr></table></figure>
+<p>当使用别人分享过来的dotfiles管理目录时，采用如下方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.取消自己对应的配置</span></span><br><span class="line">rcdn -t zsh -v</span><br><span class="line"> removed <span class="string">'/Users/Rain/.zshrc'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.将别人的对应配置符号连接过来，进行测试</span></span><br><span class="line">rcup <span class="_">-d</span> ~/.SarahDotfiles -t zsh</span><br><span class="line"> <span class="string">'/Users/Rain/Download/.SarahDotfiles/tag-zsh/zshrc'</span> -&gt; <span class="string">'/Users/Rain/.zshrc'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.如果不满意则取消对方的配置，并重新链接回自己的配置</span></span><br><span class="line">rcdn <span class="_">-d</span> ~/.SarahDotfiles -t zsh</span><br><span class="line">rcup -t zsh</span><br><span class="line"></span><br><span class="line"><span class="comment">#4.如果满意则copy对方的配置到我的~目录，在自己重建dotfiles管理目录中对应的文件</span></span><br><span class="line">rcup <span class="_">-d</span> ~/.SarahDotfiles -t zsh -C</span><br><span class="line">mkrc .zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#5.使用git对自己的dotfiles管理目录进行版本管理</span></span><br></pre></td></tr></table></figure>
+<p>更多使用方法请参考man page <a href="http://thoughtbot.github.io/rcm/rcup.1.html" target="_blank" rel="external">rcup(1)</a>, <a href="http://thoughtbot.github.io/rcm/mkrc.1.html" target="_blank" rel="external">mkrc(1)</a>, <a href="http://thoughtbot.github.io/rcm/rcdn.1.html" target="_blank" rel="external">rcdn(1)</a>, <a href="http://thoughtbot.github.io/rcm/lsrc.1.html" target="_blank" rel="external">lsrc(1)</a>, <a href="http://thoughtbot.github.io/rcm/rcrc.5.html" target="_blank" rel="external">rcrc(5)</a>和<a href="http://thoughtbot.github.io/rcm/rcm.7.html" target="_blank" rel="external">rcm(7)</a> quick start tutorial.</p>
+<p>I</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/rc-file/" rel="tag">#rc-file</a>
+          
+            <a href="/tags/dotfile/" rel="tag">#dotfile</a>
+          
+            <a href="/tags/rcm/" rel="tag">#rcm</a>
+          
+            <a href="/tags/linux/" rel="tag">#linux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/12/create-orphan-git-branch/" rel="next" title="创建Git独立分支">
+                <i class="fa fa-chevron-left"></i> 创建Git独立分支
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/16/mac-useful-application/" rel="prev" title="Mac实用软件推荐">
+                Mac实用软件推荐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/"
+     data-title="管理linux下软件的配置文件dotfile(rc files)"
+     data-content=""
+     data-url="http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/"
+           data-title="管理linux下软件的配置文件dotfile(rc files)" data-url="http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="王天雨" />
+          <p class="site-author-name" itemprop="name">王天雨</p>
+          <p class="site-description motion-element" itemprop="description">生命不息，编程不止</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wty21cn" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/wty21cn" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/wty21cn" target="_blank">
+                  
+                    <i class="fa fa-linkedin"></i> Linkedin
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:wty21cn@163.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#所需软件介绍"><span class="nav-number">1.</span> <span class="nav-text">所需软件介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装RCM"><span class="nav-number">2.</span> <span class="nav-text">安装RCM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac"><span class="nav-number">2.1.</span> <span class="nav-text">Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ubuntu"><span class="nav-number">2.2.</span> <span class="nav-text">Ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arch-Linux"><span class="nav-number">2.3.</span> <span class="nav-text">Arch Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debian-based"><span class="nav-number">2.4.</span> <span class="nav-text">Debian-based</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gentoo-based-including-Funtoo"><span class="nav-number">2.5.</span> <span class="nav-text">Gentoo-based (including Funtoo)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenBSD-current"><span class="nav-number">2.6.</span> <span class="nav-text">OpenBSD(-current)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openSUSE-RHEL-CentOS"><span class="nav-number">2.7.</span> <span class="nav-text">openSUSE/RHEL/CentOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他Linux发行版"><span class="nav-number">2.8.</span> <span class="nav-text">其他Linux发行版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCM使用方法"><span class="nav-number">3.</span> <span class="nav-text">RCM使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过mkrc命令创建Dotfiles管理目录"><span class="nav-number">3.1.</span> <span class="nav-text">通过mkrc命令创建Dotfiles管理目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">3.2.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mkrc命令高级用法"><span class="nav-number">3.3.</span> <span class="nav-text">mkrc命令高级用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过rcup命令更新dotfiles"><span class="nav-number">3.4.</span> <span class="nav-text">通过rcup命令更新dotfiles</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础用法"><span class="nav-number">3.4.1.</span> <span class="nav-text">基础用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级用法"><span class="nav-number">3.4.2.</span> <span class="nav-text">高级用法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的日常使用方法"><span class="nav-number">4.</span> <span class="nav-text">我的日常使用方法</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王天雨</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wty21cn"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+
+</body>
+</html>
