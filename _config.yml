@@ -82,7 +82,7 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  message: [Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}]
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
   repo: 
-    gitcafe: <git@gitcafe.com:wty21cn/wty21cn.git>,[gitcafe-pages]
-    github: <https://github.com/wty21cn/wty21cn.github.io.git>,[master] 
+    gitcafe: https://git.coding.net/wty21cn/wty.im.git,master
+    github: https://github.com/wty21cn/wty21cn.github.io.git,master 
