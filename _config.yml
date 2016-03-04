@@ -68,10 +68,10 @@ per_page: 10
 pagination_dir: page
 
 # title, chinese available
-links_title: Links
+#links_title: Links
 # links
-links:
-  MacTalk: http://macshuo.com/
+#links:
+#  MacTalk: http://macshuo.com/
 
 # Extensions
 ## Plugins: http://hexo.io/plugins/
@@ -82,5 +82,7 @@ theme: next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@gitcafe.com:wty21cn/wty21cn.git
-  branch: gitcafe-pages
+  message: [Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}]
+  repo: 
+    gitcafe: <git@gitcafe.com:wty21cn/wty21cn.git>,[gitcafe-pages]
+    github: <https://github.com/wty21cn/wty21cn.github.io.git>,[master] 
