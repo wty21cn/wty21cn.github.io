@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+    
+  <url>
+    <loc>http://wty.im/2015/08/11/hello-world/</loc>
+    <lastmod>2016-03-03T17:18:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2015-08-10T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Tech" url="http://wty.im/categories/Tech/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/</loc>
+    <lastmod>2016-03-03T15:19:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>在Storyboard中使用由xib定义的view</title>
+        <pubTime>2016-02-29T07:41:22.000Z</pubTime>
+        
+        <tag>iOS开发</tag>
+         
+        <tag>Inteface Builder</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://wty.im/2015/08/16/mac-useful-application/</loc>
+    <lastmod>2016-03-03T06:12:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mac实用软件推荐</title>
+        <pubTime>2015-08-16T04:41:22.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+        <tag>App</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tech" url="http://wty.im/categories/Tech/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</loc>
+    <lastmod>2016-03-03T06:12:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>管理linux下软件的配置文件dotfile(rc files)</title>
+        <pubTime>2015-08-14T13:57:05.000Z</pubTime>
+        
+        <tag>rc-file</tag>
+         
+        <tag>dotfile</tag>
+         
+        <tag>rcm</tag>
+         
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://wty.im/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://wty.im/2015/08/12/create-orphan-git-branch/</loc>
+    <lastmod>2016-03-03T06:11:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>创建Git独立分支</title>
+        <pubTime>2015-08-11T16:00:00.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+         
+           
+             
+              <breadCrumb title="Dev" url="http://wty.im/categories/Dev/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
+    <lastmod>2016-03-03T06:10:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接</title>
+        <pubTime>2015-09-22T07:41:22.000Z</pubTime>
+        
+        <tag>iOS开发</tag>
+         
+        <tag>Xcode7</tag>
+         
+        <tag>iOS9</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
