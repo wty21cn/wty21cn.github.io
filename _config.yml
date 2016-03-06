@@ -4,7 +4,7 @@
 
 # Site
 title: 王天雨的博客
-subtitle: 
+subtitle:Rain's Blog
 description: 生命不息，编程不止
 author: 王天雨
 language: zh-Hans
@@ -91,4 +91,3 @@ deploy:
   repo: 
     coding: https://git.coding.net/wty21cn/wty.im.git,master
     github: https://github.com/wty21cn/wty21cn.github.io.git,master
-    gitcafe: https://gitcafe.com/wty21cn/wty21cn.git,gitcafe-pages
