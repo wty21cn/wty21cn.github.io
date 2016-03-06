@@ -76,7 +76,7 @@ $(document).ready(function () {
   sidebarToggleLines.push(sidebarToggleLine3rd);
 
   var SIDEBAR_WIDTH = '320px';
-  var SIDEBAR_DISPLAY_DURATION = 200;
+  var SIDEBAR_DISPLAY_DURATION = 180;
 
   var sidebarToggleMotion = {
     toggleEl: $('.sidebar-toggle'),
@@ -230,7 +230,7 @@ $(document).ready(function () {
           e: $(element),
           p: {translateX: translateX},
           o: {
-            duration: 500,
+            duration: 450,
             sequenceQueue: false
           }
         };
