@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wty.im/"/>
-  <updated>2016-03-17T17:30:34.000Z</updated>
+  <updated>2016-03-17T17:35:28.000Z</updated>
   <id>http://wty.im/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/"/>
     <id>http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/</id>
     <published>2016-02-29T07:41:22.000Z</published>
-    <updated>2016-03-17T17:30:34.000Z</updated>
+    <updated>2016-03-17T17:35:28.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS开发中，使用storyboard的某些场景下我们可能希望同时使用xib定义一些可以重复利用的view，并在storyboard中调用。本文将分享一种此类xib bridge的简单实现方式。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
