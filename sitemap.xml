@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</loc>
+    
+    <lastmod>2016-03-21T08:55:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/</loc>
     
     <lastmod>2016-03-18T01:14:10.000Z</lastmod>

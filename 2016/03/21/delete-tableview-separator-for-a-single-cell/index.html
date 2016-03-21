@@ -43,7 +43,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Programming, iOS, Xcode, Algorithm" />
+  <meta name="keywords" content="iOS开发,UITableView," />
 
 
 
@@ -61,16 +61,16 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="前言在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorSty">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://wty.im/2015/08/11/hello-world/index.html">
+<meta property="og:title" content="删除TableView中单个cell的分割线">
+<meta property="og:url" content="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/index.html">
 <meta property="og:site_name" content="王天雨的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="og:updated_time" content="2016-03-03T17:18:29.000Z">
+<meta property="og:description" content="前言在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorSty">
+<meta property="og:updated_time" content="2016-03-21T08:55:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="删除TableView中单个cell的分割线">
+<meta name="twitter:description" content="前言在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorSty">
 
 
 
@@ -88,7 +88,7 @@
   };
 </script>
 
-  <title> Hello World | 王天雨的博客 </title>
+  <title> 删除TableView中单个cell的分割线 | 王天雨的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +249,7 @@
             
             
               
-                Hello World
+                删除TableView中单个cell的分割线
               
             
           </h1>
@@ -261,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-11T00:00:00+08:00" content="2015-08-11">
-              2015-08-11
+            <time itemprop="dateCreated" datetime="2016-03-21T11:23:22+08:00" content="2016-03-21">
+              2016-03-21
             </time>
           </span>
           
@@ -277,8 +277,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index">
-                    <span itemprop="name">Tech</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -293,8 +293,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/11/hello-world/" itemprop="commentsCount"></span>
+                <a href="/2016/03/21/delete-tableview-separator-for-a-single-cell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/21/delete-tableview-separator-for-a-single-cell/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -304,7 +304,7 @@
 
           
           
-             <span id="/2015/08/11/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+             <span id="/2016/03/21/delete-tableview-separator-for-a-single-cell/" class="leancloud_visitors" data-flag-title="删除TableView中单个cell的分割线">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -325,15 +325,14 @@
       
 
       
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorStyle设置成为UITableViewCellSeparatorStyleNone，去掉默认的分割线，然后自定义cell，手动在需要的行添加分割线，这么做灵活性很高，适用于各种UITableView的使用场景。</p>
+<p>上面提到的方法在某些简单的场景中显得过于复杂，比如用于不可滚动的TableView中。本文将介绍另一种实现此需求的简单方法。</p>
+<a id="more"></a>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>本方法是通过调整UITableViewCell的separatorInset属性来实现删除单个cell的分割线。</p>
+<p>在iOS7之前可以通过增大分割线左侧的inset使整个分割线移出屏幕，但是到了iOS8及以后的版本中，系统不再允许将分割线移出屏幕，因此我们必须另想其他方法。因为UITableViewCell的separatorInset可以同时设置分割线左端和右端的inset，因此当我们将两端的inset分别设置为整个cell宽度的一半时，就会将中间的分割线的宽度压缩至0，此时相当于将该cell的分割线删除。</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><p>因为此方法是根据当前cell宽度来计算并压缩分割线的，所以要考虑到当cell宽度改变时，比如orientation改变，需要重新计算inset的宽度，所以我们将在viewWillLayoutSubviews中进行处理，实现如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewWillLayoutSubviews &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillLayoutSubviews];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//除去最后一个TableViewCell下方的分割线</span></span><br><span class="line">    <span class="built_in">UITableViewCell</span> *cell = [<span class="keyword">self</span>.tableView.visibleCells lastObject];</span><br><span class="line">    cell.separatorInset = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="built_in">CGRectGetWidth</span>(cell.bounds)/<span class="number">2.0</span>, <span class="number">0</span>, <span class="built_in">CGRectGetWidth</span>(cell.bounds)/<span class="number">2.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 
       
     </div>
@@ -341,7 +340,7 @@
      
     <div align="center">
       <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享授权条款" style="border-width:0" src="/images/cc-by-sa.svg" /></a><br />
-      <a href="/2015/08/11/hello-world/">本文</a>由<a xmlns:cc="http://creativecommons.org/ns#" href="/about/" property="cc:attributionName" rel="cc:attributionURL">王天雨</a>制作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享 署名-相同方式分享 4.0 国际授权条款</a>释出 
+      <a href="/2016/03/21/delete-tableview-separator-for-a-single-cell/">本文</a>由<a xmlns:cc="http://creativecommons.org/ns#" href="/about/" property="cc:attributionName" rel="cc:attributionURL">王天雨</a>制作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享 署名-相同方式分享 4.0 国际授权条款</a>释出 
     </div>
     
 
@@ -353,18 +352,26 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
+          
+            <a href="/tags/UITableView/" rel="tag">#UITableView</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/02/29/use-view-defined-by-xib-in-storyboard/" rel="next" title="在Storyboard中使用由xib定义的view">
+                <i class="fa fa-chevron-left"></i> 在Storyboard中使用由xib定义的view
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/12/create-orphan-git-branch/" rel="prev" title="创建Git独立分支">
-                创建Git独立分支 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -379,10 +386,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/08/11/hello-world/"
-     data-title="Hello World"
+        <div class="ds-share flat" data-thread-key="2016/03/21/delete-tableview-separator-for-a-single-cell/"
+     data-title="删除TableView中单个cell的分割线"
      data-content=""
-     data-url="http://wty.im/2015/08/11/hello-world/">
+     data-url="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -409,8 +416,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/11/hello-world/"
-           data-title="Hello World" data-url="http://wty.im/2015/08/11/hello-world/">
+      <div class="ds-thread" data-thread-key="2016/03/21/delete-tableview-separator-for-a-single-cell/"
+           data-title="删除TableView中单个cell的分割线" data-url="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/">
       </div>
     
   </div>
@@ -552,7 +559,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路"><span class="nav-number">2.</span> <span class="nav-text">实现思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法"><span class="nav-number">3.</span> <span class="nav-text">实现方法</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
