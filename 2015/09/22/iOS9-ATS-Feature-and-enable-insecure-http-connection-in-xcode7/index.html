@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的Ap">
+<meta name="description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接">
 <meta property="og:url" content="http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/index.html">
 <meta property="og:site_name" content="王天雨的博客">
-<meta property="og:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的Ap">
+<meta property="og:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App">
 <meta property="og:image" content="http://wty.im/images/ATSAllowsArbitraryLoads.jpg">
 <meta property="og:image" content="http://wty.im/images/ATSSetting.jpg">
-<meta property="og:updated_time" content="2016-03-03T06:10:54.000Z">
+<meta property="og:updated_time" content="2016-07-09T06:57:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接">
-<meta name="twitter:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的Ap">
+<meta name="twitter:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App">
 <meta name="twitter:image" content="http://wty.im/images/ATSAllowsArbitraryLoads.jpg">
 
 
@@ -108,7 +108,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -358,7 +358,7 @@
       
 
       
-        <p>在iOS9中Apple新增了<a href="https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14" target="_blank" rel="external">App Transport Security</a>(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。<br><a id="more"></a></p>
+        <p>在iOS9中Apple新增了<a href="https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14" target="_blank" rel="external">App Transport Security</a>(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。<br><a id="more"></a></p>
 <p>当我们在iOS9下直接使用HTTP连接时，会出现如下错误：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure.  </span><br><span class="line">Temporary exceptions can be configured via your app&apos;s Info.plist file.</span><br></pre></td></tr></table></figure>
 <p>如果你希望暂时不适配ATS，则可以在项目的info.plist中添加如下配置，使所有未特殊指定的连接都不开启ATS特性，即允许明文传输的Http连接。其中<code>&lt;key&gt;NSAppTansportSecurtiy&lt;/key&gt;</code>是ATS配置的根节点</p>
@@ -394,7 +394,7 @@
 
       
     </div>
-
+    
     <div>
       
         
@@ -409,6 +409,13 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div align="center">
+          <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="知识共享授权条款" style="border-width:0" src="/images/cc-by-sa.svg" /></a><br />
+          <a href="/2016/03/21/delete-tableview-separator-for-a-single-cell/">本文</a>由<a xmlns:cc="http://creativecommons.org/ns#" href="/about/" property="cc:attributionName" rel="cc:attributionURL">王天雨</a>制作，以<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享 署名-相同方式分享 4.0 国际授权条款</a>释出 
+      </div> 
+       
+
       
         <div class="post-tags">
           
@@ -445,7 +452,6 @@
       
     </footer>
   </article>
-
 
 
     <div class="post-spread">

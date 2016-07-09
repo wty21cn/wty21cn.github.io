@@ -4,8 +4,32 @@
 
     
   <url>
+    <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
+    <lastmod>2016-07-09T06:57:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接</title>
+        <pubTime>2015-09-22T07:41:22.000Z</pubTime>
+        
+        <tag>iOS开发</tag>
+         
+        <tag>Xcode7</tag>
+         
+        <tag>iOS9</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</loc>
-    <lastmod>2016-03-21T08:55:54.000Z</lastmod>
+    <lastmod>2016-07-09T06:52:31.000Z</lastmod>
     <data>
         <display>
         <title>删除TableView中单个cell的分割线</title>
@@ -131,30 +155,6 @@
            
              
               <breadCrumb title="Dev" url="http://wty.im/categories/Dev/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
-    <lastmod>2016-03-03T06:10:54.000Z</lastmod>
-    <data>
-        <display>
-        <title>iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接</title>
-        <pubTime>2015-09-22T07:41:22.000Z</pubTime>
-        
-        <tag>iOS开发</tag>
-         
-        <tag>Xcode7</tag>
-         
-        <tag>iOS9</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
           
         </display>
     </data>

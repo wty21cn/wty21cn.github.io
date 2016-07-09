@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wty.im/"/>
-  <updated>2016-03-21T08:55:54.000Z</updated>
+  <updated>2016-07-09T06:52:31.000Z</updated>
   <id>http://wty.im/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/"/>
     <id>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</id>
     <published>2016-03-21T03:23:22.000Z</published>
-    <updated>2016-03-21T08:55:54.000Z</updated>
+    <updated>2016-07-09T06:52:31.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorStyle设置成为UITableViewCellSeparatorStyleNone，去掉默认的分割线，然后自定义cell，手动在需要的行添加分割线，这么做灵活性很高，适用于各种UITableView的使用场景。&lt;/p&gt;
 &lt;p&gt;上面提到的方法在某些简单的场景中显得过于复杂，比如用于不可滚动的TableView中。本文将介绍另一种实现此需求的简单方法。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;实现思路&quot;&gt;&lt;a href=&quot;#实现思路&quot; class=&quot;headerlink&quot; title=&quot;实现思路&quot;&gt;&lt;/a&gt;实现思路&lt;/h2&gt;&lt;p&gt;本方法是通过调整UITableViewCell的separatorInset属性来实现删除单个cell的分割线。&lt;/p&gt;
 &lt;p&gt;在iOS7之前可以通过增大分割线左侧的inset使整个分割线移出屏幕，但是到了iOS8及以后的版本中，系统不再允许将分割线移出屏幕，因此我们必须另想其他方法。因为UITableViewCell的separatorInset可以同时设置分割线左端和右端的inset，因此当我们将两端的inset分别设置为整个cell宽度的一半时，就会将中间的分割线的宽度压缩至0，此时相当于将该cell的分割线删除。&lt;/p&gt;
-&lt;h2 id=&quot;实现方法&quot;&gt;&lt;a href=&quot;#实现方法&quot; class=&quot;headerlink&quot; title=&quot;实现方法&quot;&gt;&lt;/a&gt;实现方法&lt;/h2&gt;&lt;p&gt;因为此方法是根据当前cell宽度来计算并压缩分割线的，所以要考虑到当cell宽度改变时，比如orientation改变，需要重新计算inset的宽度，所以我们将在viewWillLayoutSubviews中进行处理，实现如下：&lt;/p&gt;
+&lt;h2 id=&quot;实现方法&quot;&gt;&lt;a href=&quot;#实现方法&quot; class=&quot;headerlink&quot; title=&quot;实现方法&quot;&gt;&lt;/a&gt;实现方法&lt;/h2&gt;&lt;p&gt;因为此方法是根据当前cell宽度来计算并压缩分割线的，所以要考虑到当cell宽度改变时，比如orientation改变，需要重新计算inset的宽度，所以我们将在viewWillLayoutSubviews中进行处理，实现如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)viewWillLayoutSubviews &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; viewWillLayoutSubviews];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//除去最后一个TableViewCell下方的分割线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;UITableViewCell&lt;/span&gt; *cell = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.tableView.visibleCells lastObject];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cell.separatorInset = &lt;span class=&quot;built_in&quot;&gt;UIEdgeInsetsMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(cell.bounds)/&lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(cell.bounds)/&lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;hr&gt;
 </content>
@@ -108,9 +108,9 @@
     <link href="http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/"/>
     <id>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</id>
     <published>2015-09-22T07:41:22.000Z</published>
-    <updated>2016-03-03T06:10:54.000Z</updated>
+    <updated>2016-07-09T06:57:08.000Z</updated>
     
-    <content type="html">&lt;p&gt;在iOS9中Apple新增了&lt;a href=&quot;https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;App Transport Security&lt;/a&gt;(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;在iOS9中Apple新增了&lt;a href=&quot;https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;App Transport Security&lt;/a&gt;(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;当我们在iOS9下直接使用HTTP连接时，会出现如下错误：&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure.  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Temporary exceptions can be configured via your app&amp;apos;s Info.plist file.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;如果你希望暂时不适配ATS，则可以在项目的info.plist中添加如下配置，使所有未特殊指定的连接都不开启ATS特性，即允许明文传输的Http连接。其中&lt;code&gt;&amp;lt;key&amp;gt;NSAppTansportSecurtiy&amp;lt;/key&amp;gt;&lt;/code&gt;是ATS配置的根节点&lt;/p&gt;
@@ -147,7 +147,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;在iOS9中Apple新增了&lt;a href=&quot;https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14&quot;&gt;App Transport Security&lt;/a&gt;(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。&lt;br&gt;
+      &lt;p&gt;在iOS9中Apple新增了&lt;a href=&quot;https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14&quot;&gt;App Transport Security&lt;/a&gt;(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。&lt;br&gt;
     
     </summary>
     
