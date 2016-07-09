@@ -89,5 +89,5 @@ deploy:
   type: git
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
   repo: 
-    coding: https://git.coding.net/wty21cn/wty.im.git,master
+    coding: https://git.coding.net/wty21cn/wty21cn.git,master
     github: https://github.com/wty21cn/wty21cn.github.io.git,master
