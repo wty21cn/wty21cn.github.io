@@ -1,3 +1,5 @@
+/* global NexT: true */
+
 $(document).ready(function () {
   NexT.motion = {};
 
@@ -76,7 +78,7 @@ $(document).ready(function () {
   sidebarToggleLines.push(sidebarToggleLine3rd);
 
   var SIDEBAR_WIDTH = '320px';
-  var SIDEBAR_DISPLAY_DURATION = 180;
+  var SIDEBAR_DISPLAY_DURATION = 200;
 
   var sidebarToggleMotion = {
     toggleEl: $('.sidebar-toggle'),
@@ -230,7 +232,7 @@ $(document).ready(function () {
           e: $(element),
           p: {translateX: translateX},
           o: {
-            duration: 450,
+            duration: 500,
             sequenceQueue: false
           }
         };
