@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://wty.im/2016/09/22/get-the-first-responder/index.html">
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
-<meta property="og:updated_time" content="2016-09-22T05:48:52.000Z">
+<meta property="og:updated_time" content="2016-09-22T05:53:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不用私有API，一行代码获取当前响应链的First Responder">
 <meta name="twitter:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
@@ -362,7 +362,7 @@
 <h3 id="使用私有API的思路"><a href="#使用私有API的思路" class="headerlink" title="使用私有API的思路"></a>使用私有API的思路</h3><p>使用苹果的私有API可以很容易地解决这个问题，然而苹果不会允许使用私有API的App上架App Store，而且私有API很有可能随时变化，所以这种方式也很不完美。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWindow</span> *keyWindow = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</span><br><span class="line"><span class="built_in">UIView</span> *firstResponder = [keyWindow performSelector:<span class="keyword">@selector</span>(firstResponder)];</span><br></pre></td></tr></table></figure>
 <h3 id="本文的思路"><a href="#本文的思路" class="headerlink" title="本文的思路"></a>本文的思路</h3><p>本文的思路用到的核心Public API就是</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)sendAction:(SEL)action to:(<span class="keyword">id</span>)target from:(<span class="keyword">id</span>)sender forEvent:(<span class="built_in">UIEvent</span> *)event`</span><br></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)sendAction:(SEL)action to:(<span class="keyword">id</span>)target from:(<span class="keyword">id</span>)sender forEvent:(<span class="built_in">UIEvent</span> *)event</span><br></pre></td></tr></table></figure>
 <p>苹果文档对该API的target参数的描述如下：</p>
 <blockquote>
 <p>The object to receive the action message. If target is nil, the app sends the message to the first responder, from whence it progresses up the responder chain until it is handled.</p>
