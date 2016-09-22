@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Git," />
+  <meta name="keywords" content="iOS开发," />
 
 
 
@@ -88,19 +88,16 @@
 
 
 
-<meta name="description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
+<meta name="description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建Git独立分支">
-<meta property="og:url" content="http://wty.im/2015/08/12/create-orphan-git-branch/index.html">
+<meta property="og:title" content="不用私有API，一行代码获取当前响应链的First Responder">
+<meta property="og:url" content="http://wty.im/2016/09/22/get-the-first-responder/index.html">
 <meta property="og:site_name" content="王天雨的博客">
-<meta property="og:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
-<meta property="og:updated_time" content="2016-03-03T06:11:38.000Z">
+<meta property="og:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
+<meta property="og:updated_time" content="2016-09-22T05:48:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="创建Git独立分支">
-<meta name="twitter:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
+<meta name="twitter:title" content="不用私有API，一行代码获取当前响应链的First Responder">
+<meta name="twitter:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
 
 
 
@@ -118,7 +115,7 @@
   };
 </script>
 
-  <title> 创建Git独立分支 | 王天雨的博客 </title>
+  <title> 不用私有API，一行代码获取当前响应链的First Responder | 王天雨的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +280,7 @@
             
             
               
-                创建Git独立分支
+                不用私有API，一行代码获取当前响应链的First Responder
               
             
           </h1>
@@ -295,8 +292,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-12T00:00:00+08:00" content="2015-08-12">
-              2015-08-12
+            <time itemprop="dateCreated" datetime="2016-09-22T00:31:22+08:00" content="2016-09-22">
+              2016-09-22
             </time>
           </span>
 
@@ -309,8 +306,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Dev/" itemprop="url" rel="index">
-                    <span itemprop="name">Dev</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -325,8 +322,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/12/create-orphan-git-branch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/create-orphan-git-branch/" itemprop="commentsCount"></span>
+                <a href="/2016/09/22/get-the-first-responder/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/get-the-first-responder/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,7 +333,7 @@
 
           
           
-             <span id="/2015/08/12/create-orphan-git-branch/" class="leancloud_visitors" data-flag-title="创建Git独立分支">
+             <span id="/2016/09/22/get-the-first-responder/" class="leancloud_visitors" data-flag-title="不用私有API，一行代码获取当前响应链的First Responder">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,14 +355,28 @@
       
 
       
-        <p>在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。</p>
-<p>比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。<br><a id="more"></a></p>
-<h2 id="通过带orphan参数的checkout命令建立独立分支"><a href="#通过带orphan参数的checkout命令建立独立分支" class="headerlink" title="通过带orphan参数的checkout命令建立独立分支"></a>通过带orphan参数的checkout命令建立独立分支</h2><p>通过带有–orphan参数的checkout命令即可从start_point或者HEAD创建一个独立分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> repo</span><br><span class="line"><span class="variable">$git</span> checkout --orphan 新分支名 &lt;start_point&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="创建全新的独立分支"><a href="#创建全新的独立分支" class="headerlink" title="创建全新的独立分支"></a>创建全新的独立分支</h2><p>如果希望创建全新的独立分支，例如用于文档管理，则还需要进行如下删除操作<br>注意如果有不在索引中的文件，则需要手工删除(包括.gitignore)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除此分支中的索引及索引中的所有文件</span></span><br><span class="line"><span class="variable">$git</span> rm -rf .</span><br></pre></td></tr></table></figure>
-<h2 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h2><p>当前独立分支还需要创建git索引并initial commit后才能正常工作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&lt;<span class="keyword">do</span> your work&gt;</span><br><span class="line"><span class="comment">#创建git索引</span></span><br><span class="line"><span class="variable">$git</span> add .</span><br><span class="line"><span class="comment">#initial commit</span></span><br><span class="line"><span class="variable">$git</span> commit <span class="_">-a</span> -m <span class="string">"initial commit"</span></span><br><span class="line"><span class="comment">#push到远端仓库</span></span><br><span class="line"><span class="variable">$git</span> push origin 新分支名</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
+<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的Frame，从而调整视图避免键盘遮挡输入框。然而UIKit并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
+<a id="more"></a>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="常规思路"><a href="#常规思路" class="headerlink" title="常规思路"></a>常规思路</h3><p>通过遍历当前UIWindow的所有子视图，从而找到当前的第一响应者。这种方法首先需要做非常多的递归调用，从而判断所有子视图，同时当前响应链上的第一响应者还有可能是子视图的ViewController，这种方法也会漏掉。</p>
+<h3 id="使用私有API的思路"><a href="#使用私有API的思路" class="headerlink" title="使用私有API的思路"></a>使用私有API的思路</h3><p>使用苹果的私有API可以很容易地解决这个问题，然而苹果不会允许使用私有API的App上架App Store，而且私有API很有可能随时变化，所以这种方式也很不完美。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWindow</span> *keyWindow = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</span><br><span class="line"><span class="built_in">UIView</span> *firstResponder = [keyWindow performSelector:<span class="keyword">@selector</span>(firstResponder)];</span><br></pre></td></tr></table></figure>
+<h3 id="本文的思路"><a href="#本文的思路" class="headerlink" title="本文的思路"></a>本文的思路</h3><p>本文的思路用到的核心Public API就是</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">BOOL</span>)sendAction:(SEL)action to:(<span class="keyword">id</span>)target from:(<span class="keyword">id</span>)sender forEvent:(<span class="built_in">UIEvent</span> *)event`</span><br></pre></td></tr></table></figure>
+<p>苹果文档对该API的target参数的描述如下：</p>
+<blockquote>
+<p>The object to receive the action message. If target is nil, the app sends the message to the first responder, from whence it progresses up the responder chain until it is handled.</p>
+</blockquote>
+<p>从而可知，利用该API，只要将传入的target设置为nil，则系统会自动顺着响应链查找能够响应action的响应者。我们只需让所有UIResponder的子类都响应我们自定义的action，即可知道当前第一响应者是哪个对象。</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><p>为实现本文的思路，我们需要为UIResponder提供一个Category(objc)/Extension(swift)。</p>
+<h3 id="Objective-C"><a href="#Objective-C" class="headerlink" title="Objective-C"></a>Objective-C</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UIResponder+WTYFirstResponder.h</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIResponder</span> (<span class="title">WTYFirstResponder</span>)</span></span><br><span class="line"><span class="comment">//使用时只需要对UIResponder类调用该类方法即可获得当前第一响应者</span></span><br><span class="line">+ (<span class="keyword">id</span>)wty_currentFirstResponder;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  UIResponder+WTYFirstResponder.m</span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"UIResponder+WTYFirstResponder.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> __<span class="keyword">weak</span> <span class="keyword">id</span> wty_currentFirstResponder;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">UIResponder</span> (<span class="title">WTYFirstResponder</span>)</span></span><br><span class="line">+ (<span class="keyword">id</span>)wty_currentFirstResponder &#123;</span><br><span class="line">    wty_currentFirstResponder = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 通过将target设置为nil，让系统自动遍历响应链</span></span><br><span class="line">    <span class="comment">// 从而响应链当前第一响应者响应我们自定义的方法</span></span><br><span class="line">    [[<span class="built_in">UIApplication</span> sharedApplication] sendAction:<span class="keyword">@selector</span>(wty_findFirstResponder:) </span><br><span class="line">                                               to:<span class="literal">nil</span> </span><br><span class="line">                                             from:<span class="literal">nil</span> </span><br><span class="line">                                         forEvent:<span class="literal">nil</span>];</span><br><span class="line">    <span class="keyword">return</span> wty_currentFirstResponder;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)wty_findFirstResponder:(<span class="keyword">id</span>)sender &#123;</span><br><span class="line">	<span class="comment">// 第一响应者会响应这个方法，并且将静态变量wty_currentFirstResponder设置为自己</span></span><br><span class="line">    wty_currentFirstResponder = <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>使用方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"UIResponder+WTYFirstResponder.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">id</span> firstResponder = [<span class="built_in">UIResponder</span> wty_firstResponder];</span><br></pre></td></tr></table></figure>
+<h3 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  UIResponder+WTYFirstResponder.swift</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">weak</span> <span class="keyword">var</span> wty_currentFirstResponder: <span class="type">AnyObject</span>?</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIResponder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">wty_firstResponder</span><span class="params">()</span></span> -&gt; <span class="type">AnyObject</span>? &#123;</span><br><span class="line">        wty_currentFirstResponder = <span class="literal">nil</span></span><br><span class="line">        <span class="comment">// 通过将target设置为nil，让系统自动遍历响应链</span></span><br><span class="line">        <span class="comment">// 从而响应链当前第一响应者响应我们自定义的方法</span></span><br><span class="line">        <span class="type">UIApplication</span>.shared.sendAction(#selector(wty_findFirstResponder(<span class="number">_</span>:)), to: <span class="literal">nil</span>, from: <span class="literal">nil</span>, <span class="keyword">for</span>: <span class="literal">nil</span>)</span><br><span class="line">        <span class="keyword">return</span> wty_currentFirstResponder</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">wty_findFirstResponder</span><span class="params">(<span class="number">_</span> sender: AnyObject)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 第一响应者会响应这个方法，并且将静态变量wty_currentFirstResponder设置为自己</span></span><br><span class="line">        wty_currentFirstResponder = <span class="keyword">self</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firstResponder = <span class="type">UIResponder</span>.wty_firstResponder()</span><br></pre></td></tr></table></figure>
+<h2 id="Github-Repo"><a href="#Github-Repo" class="headerlink" title="Github Repo"></a>Github Repo</h2><p>本文所用的代码可以在我的<a href="https://github.com/wty21cn/WTYFirstResponder" target="_blank" rel="external">Github</a>上找到，如果觉得好用的话请并忙点个星星。</p>
+<hr>
 
       
     </div>
@@ -394,7 +405,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag">#Git</a>
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
           
         </div>
       
@@ -403,17 +414,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/03/21/delete-tableview-separator-for-a-single-cell/" rel="next" title="删除TableView中单个cell的分割线">
+                <i class="fa fa-chevron-left"></i> 删除TableView中单个cell的分割线
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/" rel="prev" title="管理linux下软件的配置文件dotfile(rc files)">
-                管理linux下软件的配置文件dotfile(rc files) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -427,10 +434,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/08/12/create-orphan-git-branch/"
-     data-title="创建Git独立分支"
+        <div class="ds-share flat" data-thread-key="2016/09/22/get-the-first-responder/"
+     data-title="不用私有API，一行代码获取当前响应链的First Responder"
      data-content=""
-     data-url="http://wty.im/2015/08/12/create-orphan-git-branch/">
+     data-url="http://wty.im/2016/09/22/get-the-first-responder/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -457,8 +464,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/12/create-orphan-git-branch/"
-           data-title="创建Git独立分支" data-url="http://wty.im/2015/08/12/create-orphan-git-branch/">
+      <div class="ds-thread" data-thread-key="2016/09/22/get-the-first-responder/"
+           data-title="不用私有API，一行代码获取当前响应链的First Responder" data-url="http://wty.im/2016/09/22/get-the-first-responder/">
       </div>
     
   </div>
@@ -600,7 +607,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过带orphan参数的checkout命令建立独立分支"><span class="nav-number">1.</span> <span class="nav-text">通过带orphan参数的checkout命令建立独立分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建全新的独立分支"><span class="nav-number">2.</span> <span class="nav-text">创建全新的独立分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始工作"><span class="nav-number">3.</span> <span class="nav-text">开始工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思路"><span class="nav-number">2.</span> <span class="nav-text">实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常规思路"><span class="nav-number">2.1.</span> <span class="nav-text">常规思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用私有API的思路"><span class="nav-number">2.2.</span> <span class="nav-text">使用私有API的思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本文的思路"><span class="nav-number">2.3.</span> <span class="nav-text">本文的思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法"><span class="nav-number">3.</span> <span class="nav-text">实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-C"><span class="nav-number">3.1.</span> <span class="nav-text">Objective-C</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift"><span class="nav-number">3.2.</span> <span class="nav-text">Swift</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github-Repo"><span class="nav-number">4.</span> <span class="nav-text">Github Repo</span></a></li></ol></div>
             
           </div>
         </section>

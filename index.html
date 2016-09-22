@@ -282,6 +282,140 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/22/get-the-first-responder/" itemprop="url">
+                  不用私有API，一行代码获取当前响应链的First Responder
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-22T00:31:22+08:00" content="2016-09-22">
+              2016-09-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/22/get-the-first-responder/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/get-the-first-responder/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/22/get-the-first-responder/" class="leancloud_visitors" data-flag-title="不用私有API，一行代码获取当前响应链的First Responder">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
+<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的Frame，从而调整视图避免键盘遮挡输入框。然而UIKit并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/22/get-the-first-responder/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/21/delete-tableview-separator-for-a-single-cell/" itemprop="url">
                   删除TableView中单个cell的分割线
                 </a>
@@ -1237,7 +1371,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
