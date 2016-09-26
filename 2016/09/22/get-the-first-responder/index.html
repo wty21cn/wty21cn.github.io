@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://wty.im/2016/09/22/get-the-first-responder/index.html">
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
-<meta property="og:updated_time" content="2016-09-26T04:29:16.000Z">
+<meta property="og:updated_time" content="2016-09-26T13:06:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不用私有API，一行代码获取当前响应链的First Responder">
 <meta name="twitter:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
@@ -382,6 +382,9 @@
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UIApplication</span>.shared.sendAction(#selector(resignFirstResponder), to: <span class="literal">nil</span>, from: <span class="literal">nil</span>, <span class="keyword">for</span>: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="Github-Repo"><a href="#Github-Repo" class="headerlink" title="Github Repo"></a>Github Repo</h2><p>本文所用的代码可以在我的<a href="https://github.com/wty21cn/WTYFirstResponder" target="_blank" rel="external">Github</a>上找到，如果觉得好用的话请并忙点个星星。</p>
 <hr>
+<blockquote>
+<p>本文个人博客地址: <a href="http://wty.im/2016/09/22/get-the-first-responder/">http://wty.im/2016/09/22/get-the-first-responder/</a><br>Github: <a href="https://github.com/wty21cn/" target="_blank" rel="external">https://github.com/wty21cn/</a></p>
+</blockquote>
 
       
     </div>

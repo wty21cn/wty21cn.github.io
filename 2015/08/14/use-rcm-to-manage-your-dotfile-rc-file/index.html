@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。
 当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希">
-<meta property="og:updated_time" content="2016-03-03T06:12:02.000Z">
+<meta property="og:updated_time" content="2016-09-26T13:06:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="管理linux下软件的配置文件dotfile(rc files)">
 <meta name="twitter:description" content="在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。
@@ -421,7 +421,10 @@
 <p>当使用别人分享过来的dotfiles管理目录时，采用如下方法</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#1.取消自己对应的配置</span></span><br><span class="line">rcdn -t zsh -v</span><br><span class="line"> removed <span class="string">'/Users/Rain/.zshrc'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.将别人的对应配置符号连接过来，进行测试</span></span><br><span class="line">rcup <span class="_">-d</span> ~/.SarahDotfiles -t zsh</span><br><span class="line"> <span class="string">'/Users/Rain/Download/.SarahDotfiles/tag-zsh/zshrc'</span> -&gt; <span class="string">'/Users/Rain/.zshrc'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#3.如果不满意则取消对方的配置，并重新链接回自己的配置</span></span><br><span class="line">rcdn <span class="_">-d</span> ~/.SarahDotfiles -t zsh</span><br><span class="line">rcup -t zsh</span><br><span class="line"></span><br><span class="line"><span class="comment">#4.如果满意则copy对方的配置到我的~目录，在自己重建dotfiles管理目录中对应的文件</span></span><br><span class="line">rcup <span class="_">-d</span> ~/.SarahDotfiles -t zsh -C</span><br><span class="line">mkrc .zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#5.使用git对自己的dotfiles管理目录进行版本管理</span></span><br></pre></td></tr></table></figure>
 <p>更多使用方法请参考man page <a href="http://thoughtbot.github.io/rcm/rcup.1.html" target="_blank" rel="external">rcup(1)</a>, <a href="http://thoughtbot.github.io/rcm/mkrc.1.html" target="_blank" rel="external">mkrc(1)</a>, <a href="http://thoughtbot.github.io/rcm/rcdn.1.html" target="_blank" rel="external">rcdn(1)</a>, <a href="http://thoughtbot.github.io/rcm/lsrc.1.html" target="_blank" rel="external">lsrc(1)</a>, <a href="http://thoughtbot.github.io/rcm/rcrc.5.html" target="_blank" rel="external">rcrc(5)</a>和<a href="http://thoughtbot.github.io/rcm/rcm.7.html" target="_blank" rel="external">rcm(7)</a> quick start tutorial.</p>
-<p>I</p>
+<hr>
+<blockquote>
+<p>本文个人博客地址: <a href="http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/">http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</a><br>Github: <a href="https://github.com/wty21cn/" target="_blank" rel="external">https://github.com/wty21cn/</a></p>
+</blockquote>
 
       
     </div>

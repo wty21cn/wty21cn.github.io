@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wty.im/"/>
-  <updated>2016-09-26T12:07:31.000Z</updated>
+  <updated>2016-09-26T13:04:40.000Z</updated>
   <id>http://wty.im/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/"/>
     <id>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</id>
     <published>2016-09-26T11:00:22.000Z</published>
-    <updated>2016-09-26T12:07:31.000Z</updated>
+    <updated>2016-09-26T13:04:40.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有sublayer的alpha通道从而精确的计算出阴影的轮廓，这是非常消耗性能的，从而导致了动画的卡顿。&lt;/p&gt;
 &lt;p&gt;为了尽可能地减小离屏渲染带来的性能影响，我们可以利用CALayer的另外一个属性shadowPath，这个属性的官方文档是这么描述的：&lt;/p&gt;
@@ -41,6 +41,9 @@
 &lt;h2 id=&quot;实现方法&quot;&gt;&lt;a href=&quot;#实现方法&quot; class=&quot;headerlink&quot; title=&quot;实现方法&quot;&gt;&lt;/a&gt;实现方法&lt;/h2&gt;&lt;p&gt;为实现本文的思路，我们需要创建一个一个UIView的子类并且重写其&lt;code&gt;layoutSubivew&lt;/code&gt;方法。&lt;/p&gt;
 &lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// Subclass of UIView&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)layoutSubviews &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; layoutSubviews];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;// 获取CALayer的bounds属性的隐式动画属性&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;CAAnimation&lt;/span&gt; *animation = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.layer animationForKey:&lt;span class=&quot;string&quot;&gt;@&quot;bounds.size&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (animation) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 为shadowPath属性显示创建一个CATransaction操作&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;built_in&quot;&gt;CATransaction&lt;/span&gt; begin];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 设置用获取到的bounds动画属性设置相关参数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;built_in&quot;&gt;CATransaction&lt;/span&gt; setAnimationDuration:animation.duration];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;built_in&quot;&gt;CATransaction&lt;/span&gt; setAnimationTimingFunction:animation.timingFunction];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 通过CABasicAnimation类来为shadowPath添加动画，当该CABasicAnimation的所有属性都为nil时&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 其会选择从shadowPath的原值动画过渡至新值&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;built_in&quot;&gt;CABasicAnimation&lt;/span&gt; *shadowPathAnimation = [&lt;span class=&quot;built_in&quot;&gt;CABasicAnimation&lt;/span&gt; animationWithKeyPath:&lt;span class=&quot;string&quot;&gt;@&quot;shadowPath&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// 将动画添加至layer的渲染树&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.layer addAnimation:shadowPathAnimation forKey:&lt;span class=&quot;string&quot;&gt;@&quot;shadowPath&quot;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        [&lt;span class=&quot;built_in&quot;&gt;CATransaction&lt;/span&gt; commit];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.layer.shadowPath = [&lt;span class=&quot;built_in&quot;&gt;UIBezierPath&lt;/span&gt; bezierPathWithRect:&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.layer.bounds].CGPath;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/&quot;&gt;http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -66,7 +69,7 @@
     <link href="http://wty.im/2016/09/26/get-topmost-view-controller/"/>
     <id>http://wty.im/2016/09/26/get-topmost-view-controller/</id>
     <published>2016-09-26T01:54:22.000Z</published>
-    <updated>2016-09-26T04:30:46.000Z</updated>
+    <updated>2016-09-26T13:06:17.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的ViewController&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -77,6 +80,9 @@
 &lt;p&gt;使用方法&lt;/p&gt;
 &lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;UIViewController&lt;/span&gt; *topmostVC = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt; topViewController];&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2016/09/26/get-topmost-view-controller/&quot;&gt;http://wty.im/2016/09/26/get-topmost-view-controller/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -97,7 +103,7 @@
     <link href="http://wty.im/2016/09/22/get-the-first-responder/"/>
     <id>http://wty.im/2016/09/22/get-the-first-responder/</id>
     <published>2016-09-21T16:31:22.000Z</published>
-    <updated>2016-09-26T04:29:16.000Z</updated>
+    <updated>2016-09-26T13:06:06.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。&lt;/p&gt;
 &lt;p&gt;在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的Frame，从而调整视图避免键盘遮挡输入框。然而UIKit并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。&lt;/p&gt;
@@ -126,6 +132,9 @@
 &lt;figure class=&quot;highlight swift&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;type&quot;&gt;UIApplication&lt;/span&gt;.shared.sendAction(#selector(resignFirstResponder), to: &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;, from: &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;, &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt;: &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;Github-Repo&quot;&gt;&lt;a href=&quot;#Github-Repo&quot; class=&quot;headerlink&quot; title=&quot;Github Repo&quot;&gt;&lt;/a&gt;Github Repo&lt;/h2&gt;&lt;p&gt;本文所用的代码可以在我的&lt;a href=&quot;https://github.com/wty21cn/WTYFirstResponder&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github&lt;/a&gt;上找到，如果觉得好用的话请并忙点个星星。&lt;/p&gt;
 &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2016/09/22/get-the-first-responder/&quot;&gt;http://wty.im/2016/09/22/get-the-first-responder/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -147,7 +156,7 @@
     <link href="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/"/>
     <id>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</id>
     <published>2016-03-21T03:23:22.000Z</published>
-    <updated>2016-07-09T06:52:31.000Z</updated>
+    <updated>2016-09-26T13:05:19.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorStyle设置成为UITableViewCellSeparatorStyleNone，去掉默认的分割线，然后自定义cell，手动在需要的行添加分割线，这么做灵活性很高，适用于各种UITableView的使用场景。&lt;/p&gt;
 &lt;p&gt;上面提到的方法在某些简单的场景中显得过于复杂，比如用于不可滚动的TableView中。本文将介绍另一种实现此需求的简单方法。&lt;/p&gt;
@@ -157,6 +166,9 @@
 &lt;h2 id=&quot;实现方法&quot;&gt;&lt;a href=&quot;#实现方法&quot; class=&quot;headerlink&quot; title=&quot;实现方法&quot;&gt;&lt;/a&gt;实现方法&lt;/h2&gt;&lt;p&gt;因为此方法是根据当前cell宽度来计算并压缩分割线的，所以要考虑到当cell宽度改变时，比如orientation改变，需要重新计算inset的宽度，所以我们将在viewWillLayoutSubviews中进行处理，实现如下：&lt;/p&gt;
 &lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;- (&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt;)viewWillLayoutSubviews &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    [&lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt; viewWillLayoutSubviews];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//除去最后一个TableViewCell下方的分割线&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;built_in&quot;&gt;UITableViewCell&lt;/span&gt; *cell = [&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;.tableView.visibleCells lastObject];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    cell.separatorInset = &lt;span class=&quot;built_in&quot;&gt;UIEdgeInsetsMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(cell.bounds)/&lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;built_in&quot;&gt;CGRectGetWidth&lt;/span&gt;(cell.bounds)/&lt;span class=&quot;number&quot;&gt;2.0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/&quot;&gt;http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -180,7 +192,7 @@
     <link href="http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/"/>
     <id>http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/</id>
     <published>2016-02-29T07:41:22.000Z</published>
-    <updated>2016-03-18T01:14:10.000Z</updated>
+    <updated>2016-09-26T13:05:35.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在iOS开发中，使用storyboard的某些场景下我们可能希望同时使用xib定义一些可以重复利用的view，并在storyboard中调用。本文将分享一种此类xib bridge的简单实现方式。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
@@ -213,6 +225,10 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;p&gt;对于xib桥接问题大神SUNNYXX给出了一个&lt;a href=&quot;http://blog.sunnyxx.com/2014/07/01/ios_ib_bridge/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;更高端的解决方案&lt;/a&gt;，利用到了iOS runtime相关的技术。&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/&quot;&gt;http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -235,7 +251,7 @@
     <link href="http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/"/>
     <id>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</id>
     <published>2015-09-22T07:41:22.000Z</published>
-    <updated>2016-07-09T06:57:08.000Z</updated>
+    <updated>2016-09-26T13:05:05.000Z</updated>
     
     <content type="html">&lt;p&gt;在iOS9中Apple新增了&lt;a href=&quot;https://developer.apple.com/library/ios/releasenotes/General/WhatsNewIniOS/Articles/iOS9.html#//apple_ref/doc/uid/TP40016198-SW14&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;App Transport Security&lt;/a&gt;(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App时都应尽快对ATS进行适配。本文将介绍在Xcode7中对ATS进行配置。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;当我们在iOS9下直接使用HTTP连接时，会出现如下错误：&lt;/p&gt;
@@ -270,6 +286,10 @@
 &lt;p&gt;&lt;img src=&quot;/images/ATSSetting.jpg&quot; alt=&quot;ATSSetting&quot;&gt;&lt;/p&gt;
 &lt;p&gt;当NSExceptionRequiresForwardSecrecy设置为NO时，ATS将额外支持以下加密方法：&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_256_GCM_SHA384&lt;/code&gt;&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_128_GCM_SHA256&lt;/code&gt;&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_256_CBC_SHA256&lt;/code&gt;&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_256_CBC_SHA&lt;/code&gt;&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_128_CBC_SHA256&lt;/code&gt;&lt;br&gt;&lt;code&gt;TLS_RSA_WITH_AES_128_CBC_SHA&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;更多ATS的信息可以参考iOS Developer Library的&lt;a href=&quot;https://developer.apple.com/library/ios/technotes/App-Transport-Security-Technote/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;App Transport Security Technote&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/&quot;&gt;http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -337,7 +357,7 @@
     <link href="http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/"/>
     <id>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</id>
     <published>2015-08-14T13:57:05.000Z</published>
-    <updated>2016-03-03T06:12:02.000Z</updated>
+    <updated>2016-09-26T13:06:51.000Z</updated>
     
     <content type="html">&lt;p&gt;在linux下，各种软件的配置文件大多存储于以“.”开头以“rc”结尾的文件中并存放于用户的个人目录~/中，也就是俗称的dotfile或者rc file，例如zsh的配置文件.zshrc，vim的配置文件.vimrc等等。&lt;/p&gt;
 &lt;p&gt;当我们初次使用一些软件时经常会花大量时间对相应的dotfile(rc file)进行配置，让软件以符合我们期望的方式工作，在使用时也时常会对dotfile进行调整。但是当我们希望在新电脑上恢复多个软件配置或者在多台电脑上共享一台电脑对dotfile的修改时，逐一对各个dotfile进行管理非常不方便。&lt;/p&gt;
@@ -402,7 +422,10 @@
 &lt;p&gt;当使用别人分享过来的dotfiles管理目录时，采用如下方法&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#1.取消自己对应的配置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rcdn -t zsh -v&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; removed &lt;span class=&quot;string&quot;&gt;&#39;/Users/Rain/.zshrc&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#2.将别人的对应配置符号连接过来，进行测试&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rcup &lt;span class=&quot;_&quot;&gt;-d&lt;/span&gt; ~/.SarahDotfiles -t zsh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &lt;span class=&quot;string&quot;&gt;&#39;/Users/Rain/Download/.SarahDotfiles/tag-zsh/zshrc&#39;&lt;/span&gt; -&amp;gt; &lt;span class=&quot;string&quot;&gt;&#39;/Users/Rain/.zshrc&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#3.如果不满意则取消对方的配置，并重新链接回自己的配置&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rcdn &lt;span class=&quot;_&quot;&gt;-d&lt;/span&gt; ~/.SarahDotfiles -t zsh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rcup -t zsh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#4.如果满意则copy对方的配置到我的~目录，在自己重建dotfiles管理目录中对应的文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;rcup &lt;span class=&quot;_&quot;&gt;-d&lt;/span&gt; ~/.SarahDotfiles -t zsh -C&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;mkrc .zshrc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#5.使用git对自己的dotfiles管理目录进行版本管理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;更多使用方法请参考man page &lt;a href=&quot;http://thoughtbot.github.io/rcm/rcup.1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;rcup(1)&lt;/a&gt;, &lt;a href=&quot;http://thoughtbot.github.io/rcm/mkrc.1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;mkrc(1)&lt;/a&gt;, &lt;a href=&quot;http://thoughtbot.github.io/rcm/rcdn.1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;rcdn(1)&lt;/a&gt;, &lt;a href=&quot;http://thoughtbot.github.io/rcm/lsrc.1.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;lsrc(1)&lt;/a&gt;, &lt;a href=&quot;http://thoughtbot.github.io/rcm/rcrc.5.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;rcrc(5)&lt;/a&gt;和&lt;a href=&quot;http://thoughtbot.github.io/rcm/rcm.7.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;rcm(7)&lt;/a&gt; quick start tutorial.&lt;/p&gt;
-&lt;p&gt;I&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/&quot;&gt;http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">
@@ -431,7 +454,7 @@
     <link href="http://wty.im/2015/08/12/create-orphan-git-branch/"/>
     <id>http://wty.im/2015/08/12/create-orphan-git-branch/</id>
     <published>2015-08-11T16:00:00.000Z</published>
-    <updated>2016-03-03T06:11:38.000Z</updated>
+    <updated>2016-09-26T13:06:28.000Z</updated>
     
     <content type="html">&lt;p&gt;在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。&lt;/p&gt;
 &lt;p&gt;比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -441,6 +464,10 @@
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#删除此分支中的索引及索引中的所有文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$git&lt;/span&gt; rm -rf .&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;开始工作&quot;&gt;&lt;a href=&quot;#开始工作&quot; class=&quot;headerlink&quot; title=&quot;开始工作&quot;&gt;&lt;/a&gt;开始工作&lt;/h2&gt;&lt;p&gt;当前独立分支还需要创建git索引并initial commit后才能正常工作&lt;/p&gt;
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$&amp;lt;&lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt; your work&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#创建git索引&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$git&lt;/span&gt; add .&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#initial commit&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$git&lt;/span&gt; commit &lt;span class=&quot;_&quot;&gt;-a&lt;/span&gt; -m &lt;span class=&quot;string&quot;&gt;&quot;initial commit&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#push到远端仓库&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;variable&quot;&gt;$git&lt;/span&gt; push origin 新分支名&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文个人博客地址: &lt;a href=&quot;http://wty.im/2015/08/12/create-orphan-git-branch/&quot;&gt;http://wty.im/2015/08/12/create-orphan-git-branch/&lt;/a&gt;&lt;br&gt;Github: &lt;a href=&quot;https://github.com/wty21cn/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wty21cn/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </content>
     
     <summary type="html">

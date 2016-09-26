@@ -2,44 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
+    <loc>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</loc>
     
-    <lastmod>2016-09-26T12:07:31.000Z</lastmod>
+    <lastmod>2016-09-26T13:06:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wty.im/2015/08/12/create-orphan-git-branch/</loc>
+    
+    <lastmod>2016-09-26T13:06:28.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://wty.im/2016/09/26/get-topmost-view-controller/</loc>
     
-    <lastmod>2016-09-26T04:30:46.000Z</lastmod>
+    <lastmod>2016-09-26T13:06:17.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://wty.im/2016/09/22/get-the-first-responder/</loc>
     
-    <lastmod>2016-09-26T04:29:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
-    
-    <lastmod>2016-07-09T06:57:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</loc>
-    
-    <lastmod>2016-07-09T06:52:31.000Z</lastmod>
+    <lastmod>2016-09-26T13:06:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://wty.im/2016/02/29/use-view-defined-by-xib-in-storyboard/</loc>
     
-    <lastmod>2016-03-18T01:14:10.000Z</lastmod>
+    <lastmod>2016-09-26T13:05:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</loc>
+    
+    <lastmod>2016-09-26T13:05:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
+    
+    <lastmod>2016-09-26T13:05:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
+    
+    <lastmod>2016-09-26T13:04:40.000Z</lastmod>
     
   </url>
   
@@ -82,20 +96,6 @@
     <loc>http://wty.im/2015/08/16/mac-useful-application/</loc>
     
     <lastmod>2016-03-03T06:12:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</loc>
-    
-    <lastmod>2016-03-03T06:12:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wty.im/2015/08/12/create-orphan-git-branch/</loc>
-    
-    <lastmod>2016-03-03T06:11:38.000Z</lastmod>
     
   </url>
   

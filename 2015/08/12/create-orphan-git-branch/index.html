@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
 比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
-<meta property="og:updated_time" content="2016-03-03T06:11:38.000Z">
+<meta property="og:updated_time" content="2016-09-26T13:06:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建Git独立分支">
 <meta name="twitter:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
@@ -366,6 +366,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除此分支中的索引及索引中的所有文件</span></span><br><span class="line"><span class="variable">$git</span> rm -rf .</span><br></pre></td></tr></table></figure>
 <h2 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h2><p>当前独立分支还需要创建git索引并initial commit后才能正常工作</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&lt;<span class="keyword">do</span> your work&gt;</span><br><span class="line"><span class="comment">#创建git索引</span></span><br><span class="line"><span class="variable">$git</span> add .</span><br><span class="line"><span class="comment">#initial commit</span></span><br><span class="line"><span class="variable">$git</span> commit <span class="_">-a</span> -m <span class="string">"initial commit"</span></span><br><span class="line"><span class="comment">#push到远端仓库</span></span><br><span class="line"><span class="variable">$git</span> push origin 新分支名</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>本文个人博客地址: <a href="http://wty.im/2015/08/12/create-orphan-git-branch/">http://wty.im/2015/08/12/create-orphan-git-branch/</a><br>Github: <a href="https://github.com/wty21cn/" target="_blank" rel="external">https://github.com/wty21cn/</a></p>
+</blockquote>
 
       
     </div>

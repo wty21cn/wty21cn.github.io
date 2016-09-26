@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/index.html">
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="前言在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorSty">
-<meta property="og:updated_time" content="2016-07-09T06:52:31.000Z">
+<meta property="og:updated_time" content="2016-09-26T13:05:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="删除TableView中单个cell的分割线">
 <meta name="twitter:description" content="前言在iOS开发中，我们最常使用的UIKit控件之一就是UITableView，默认情况下我们可以通过UITableView的separatorStyle属性来更改所有cell的分割线样式，但是有时我们会遇到需要更改单独一个cell的分割线的需求，比如删除最下面一行cell的分割线，这是separatorStyle属性就不能满足要求了。为了达到目的我们可以采用的方法之一是将separatorSty">
@@ -363,6 +363,9 @@
 <h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><p>因为此方法是根据当前cell宽度来计算并压缩分割线的，所以要考虑到当cell宽度改变时，比如orientation改变，需要重新计算inset的宽度，所以我们将在viewWillLayoutSubviews中进行处理，实现如下：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewWillLayoutSubviews &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillLayoutSubviews];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//除去最后一个TableViewCell下方的分割线</span></span><br><span class="line">    <span class="built_in">UITableViewCell</span> *cell = [<span class="keyword">self</span>.tableView.visibleCells lastObject];</span><br><span class="line">    cell.separatorInset = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>, <span class="built_in">CGRectGetWidth</span>(cell.bounds)/<span class="number">2.0</span>, <span class="number">0</span>, <span class="built_in">CGRectGetWidth</span>(cell.bounds)/<span class="number">2.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
+<blockquote>
+<p>本文个人博客地址: <a href="http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/">http://wty.im/2016/03/21/delete-tableview-separator-for-a-single-cell/</a><br>Github: <a href="https://github.com/wty21cn/" target="_blank" rel="external">https://github.com/wty21cn/</a></p>
+</blockquote>
 
       
     </div>

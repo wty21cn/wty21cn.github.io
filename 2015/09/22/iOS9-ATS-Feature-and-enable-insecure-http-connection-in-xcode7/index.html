@@ -96,7 +96,7 @@
 <meta property="og:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App">
 <meta property="og:image" content="http://wty.im/images/ATSAllowsArbitraryLoads.jpg">
 <meta property="og:image" content="http://wty.im/images/ATSSetting.jpg">
-<meta property="og:updated_time" content="2016-07-09T06:57:08.000Z">
+<meta property="og:updated_time" content="2016-09-26T13:05:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS9 ATS特性以及在Xcode7中针对iOS9开启不安全的http连接">
 <meta name="twitter:description" content="在iOS9中Apple新增了App Transport Security(ATS)特性，其主要目的就是规定了App与服务器通信时将默认要求使用安全的连接，旨在提高App的安全性，APP在使用higher-level API（如NSURLConnection, NSURLSession等）进行通信时如果不采用TLS 1.2协议进行传输，iOS将会报错。Apple推荐创建新的App和在更新已有的App">
@@ -391,6 +391,10 @@
 <p><img src="/images/ATSSetting.jpg" alt="ATSSetting"></p>
 <p>当NSExceptionRequiresForwardSecrecy设置为NO时，ATS将额外支持以下加密方法：<br><code>TLS_RSA_WITH_AES_256_GCM_SHA384</code><br><code>TLS_RSA_WITH_AES_128_GCM_SHA256</code><br><code>TLS_RSA_WITH_AES_256_CBC_SHA256</code><br><code>TLS_RSA_WITH_AES_256_CBC_SHA</code><br><code>TLS_RSA_WITH_AES_128_CBC_SHA256</code><br><code>TLS_RSA_WITH_AES_128_CBC_SHA</code></p>
 <p>更多ATS的信息可以参考iOS Developer Library的<a href="https://developer.apple.com/library/ios/technotes/App-Transport-Security-Technote/index.html" target="_blank" rel="external">App Transport Security Technote</a></p>
+<hr>
+<blockquote>
+<p>本文个人博客地址: <a href="http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/">http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</a><br>Github: <a href="https://github.com/wty21cn/" target="_blank" rel="external">https://github.com/wty21cn/</a></p>
+</blockquote>
 
       
     </div>
