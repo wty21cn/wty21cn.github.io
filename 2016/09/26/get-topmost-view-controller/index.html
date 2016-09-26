@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://wty.im/2016/09/26/get-topmost-view-controller/index.html">
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="前言在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的ViewController">
-<meta property="og:updated_time" content="2016-09-26T04:29:20.000Z">
+<meta property="og:updated_time" content="2016-09-26T04:30:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="获取当前最顶层的ViewController">
 <meta name="twitter:description" content="前言在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的ViewController">
@@ -355,7 +355,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的<code>ViewController</code></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的ViewController</p>
 <a id="more"></a>
 <h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>通过最底层的ViewController依次向上寻找，直到找到最顶层的ViewController，也就是从UIApplication的keyWindow的rootViewController开始寻找（如果有多个UIWindow则要考虑UIWindow的选择问题。</p>
 <p>在寻找的过程中，要分别考虑当前ViewController是UITabBarController和UINavigationController的情况，同时还要考虑到当前ViewController是否通过<code>presentViewController:animated:completion:</code>模态展示了其他ViewController。</p>
