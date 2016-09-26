@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://wty.im/2016/09/22/get-the-first-responder/index.html">
 <meta property="og:site_name" content="王天雨的博客">
 <meta property="og:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
-<meta property="og:updated_time" content="2016-09-26T04:21:21.000Z">
+<meta property="og:updated_time" content="2016-09-26T04:29:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不用私有API，一行代码获取当前响应链的First Responder">
 <meta name="twitter:description" content="前言在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链">
@@ -355,10 +355,10 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而<code>UIResponder</code>类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
-<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的<code>Frame</code>，从而调整视图避免键盘遮挡输入框。然而<code>UIKit</code>并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
+<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的Frame，从而调整视图避免键盘遮挡输入框。然而UIKit并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
 <a id="more"></a>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="常规思路"><a href="#常规思路" class="headerlink" title="常规思路"></a>常规思路</h3><p>通过遍历当前<code>UIWindow</code>的所有子视图，从而找到当前的第一响应者。这种方法首先需要做非常多的递归调用，从而判断所有子视图，同时当前响应链上的第一响应者还有可能是子视图的<code>ViewController</code>，这种方法也会漏掉。</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><h3 id="常规思路"><a href="#常规思路" class="headerlink" title="常规思路"></a>常规思路</h3><p>通过遍历当前UIWindow的所有子视图，从而找到当前的第一响应者。这种方法首先需要做非常多的递归调用，从而判断所有子视图，同时当前响应链上的第一响应者还有可能是子视图的ViewController，这种方法也会漏掉。</p>
 <h3 id="使用私有API的思路"><a href="#使用私有API的思路" class="headerlink" title="使用私有API的思路"></a>使用私有API的思路</h3><p>使用苹果的私有API可以很容易地解决这个问题，然而苹果不会允许使用私有API的App上架App Store，而且私有API很有可能随时变化，所以这种方式也很不完美。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">UIWindow</span> *keyWindow = [[<span class="built_in">UIApplication</span> sharedApplication] keyWindow];</span><br><span class="line"><span class="built_in">UIView</span> *firstResponder = [keyWindow performSelector:<span class="keyword">@selector</span>(firstResponder)];</span><br></pre></td></tr></table></figure>
 <h3 id="本文的思路"><a href="#本文的思路" class="headerlink" title="本文的思路"></a>本文的思路</h3><p>本文的思路用到的核心Public API就是</p>

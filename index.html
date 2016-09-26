@@ -360,7 +360,7 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的<code>ViewController</code>，比如我们需要在最顶层的<code>ViewController</code>上展示一个<code>UIAlertController</code>的时候。本文将介绍如何获取最顶层的<code>ViewController</code></p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中开放中，我们可能会遇到需要通过代码获取当前显示在屏幕最顶层的ViewController，比如我们需要在最顶层的ViewController上展示一个UIAlertController的时候。本文将介绍如何获取最顶层的<code>ViewController</code></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/09/26/get-topmost-view-controller/#more" rel="contents">
               阅读全文 &raquo;
@@ -493,8 +493,8 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而<code>UIResponder</code>类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
-<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的<code>Frame</code>，从而调整视图避免键盘遮挡输入框。然而<code>UIKit</code>并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS中，当发生事件响应时，必须知道由谁来响应事件。而UIResponder类就是专门用来响应用户的操作，处理各种事件的，包括触摸事件(Touch Events)、运动事件(Motion Events)和远程控制事件(Remote Control Events)。iOS处理事件的流程将遵循一个不同对象组成的层次结构，也就是响应者链(Responder Chain)，网上目前有很多关于响应者链的介绍，这里就不再细讲。在响应者链中非常重要的一个概念就是第一响应者(First Responder)，当前第一响应者负责响应事件，或将事件传递给下一响应者。</p>
+<p>在编写iOS程序时，我们经常会遇到需要获取当前的第一响应者，例如系统弹出键盘时，我们希望得到当前输入框(也就是第一响应者)的Frame，从而调整视图避免键盘遮挡输入框。然而UIKit并没有提供官方的API专门用于该用途。本文将介绍一种非常简单的且未用到私有API的方法来获取当前第一响应者。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/09/22/get-the-first-responder/#more" rel="contents">
               阅读全文 &raquo;
