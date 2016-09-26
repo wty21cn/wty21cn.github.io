@@ -17,8 +17,8 @@
   
   <entry>
     <title>让CALayer的shadowPath跟随bounds一起做动画改变</title>
-    <link href="http://wty.im/2016/09/26/shadow-path-animation/"/>
-    <id>http://wty.im/2016/09/26/shadow-path-animation/</id>
+    <link href="http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/"/>
+    <id>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</id>
     <published>2016-09-26T11:00:22.000Z</published>
     <updated>2016-09-26T12:07:31.000Z</updated>
     
