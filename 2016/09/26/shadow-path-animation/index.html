@@ -70,7 +70,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Git," />
+  <meta name="keywords" content="iOS开发," />
 
 
 
@@ -88,19 +88,16 @@
 
 
 
-<meta name="description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
+<meta name="description" content="前言在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建Git独立分支">
-<meta property="og:url" content="http://wty.im/2015/08/12/create-orphan-git-branch/index.html">
+<meta property="og:title" content="让CALayer的shadowPath属性跟随bounds属性一起做动画改变">
+<meta property="og:url" content="http://wty.im/2016/09/26/shadow-path-animation/index.html">
 <meta property="og:site_name" content="王天雨的博客">
-<meta property="og:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
-<meta property="og:updated_time" content="2016-03-03T06:11:38.000Z">
+<meta property="og:description" content="前言在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有s">
+<meta property="og:updated_time" content="2016-09-26T12:04:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="创建Git独立分支">
-<meta name="twitter:description" content="在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。
-比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。">
+<meta name="twitter:title" content="让CALayer的shadowPath属性跟随bounds属性一起做动画改变">
+<meta name="twitter:description" content="前言在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有s">
 
 
 
@@ -118,7 +115,7 @@
   };
 </script>
 
-  <title> 创建Git独立分支 | 王天雨的博客 </title>
+  <title> 让CALayer的shadowPath属性跟随bounds属性一起做动画改变 | 王天雨的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +280,7 @@
             
             
               
-                创建Git独立分支
+                让CALayer的shadowPath属性跟随bounds属性一起做动画改变
               
             
           </h1>
@@ -295,8 +292,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-12T00:00:00+08:00" content="2015-08-12">
-              2015-08-12
+            <time itemprop="dateCreated" datetime="2016-09-26T19:00:22+08:00" content="2016-09-26">
+              2016-09-26
             </time>
           </span>
 
@@ -309,8 +306,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Dev/" itemprop="url" rel="index">
-                    <span itemprop="name">Dev</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -325,8 +322,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/12/create-orphan-git-branch/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/12/create-orphan-git-branch/" itemprop="commentsCount"></span>
+                <a href="/2016/09/26/shadow-path-animation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/shadow-path-animation/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -336,7 +333,7 @@
 
           
           
-             <span id="/2015/08/12/create-orphan-git-branch/" class="leancloud_visitors" data-flag-title="创建Git独立分支">
+             <span id="/2016/09/26/shadow-path-animation/" class="leancloud_visitors" data-flag-title="让CALayer的shadowPath属性跟随bounds属性一起做动画改变">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -358,14 +355,25 @@
       
 
       
-        <p>在使用git进行版本控制的某些场景中我们可能需要在一个项目中建立完全独立的分支，此分支将作为一个独立的版本历史根节点，不与之前任何分支拥有相同的版本祖先。</p>
-<p>比如当我们要在一个项目中使用一个分支进行项目文档的管理时，或者当我们想要发布一个软件的开源版本但又不希望将软件的版本历史暴露给外界时，都可以使用以下的方法建立一个独立分支。<br><a id="more"></a></p>
-<h2 id="通过带orphan参数的checkout命令建立独立分支"><a href="#通过带orphan参数的checkout命令建立独立分支" class="headerlink" title="通过带orphan参数的checkout命令建立独立分支"></a>通过带orphan参数的checkout命令建立独立分支</h2><p>通过带有–orphan参数的checkout命令即可从start_point或者HEAD创建一个独立分支</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> repo</span><br><span class="line"><span class="variable">$git</span> checkout --orphan 新分支名 &lt;start_point&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="创建全新的独立分支"><a href="#创建全新的独立分支" class="headerlink" title="创建全新的独立分支"></a>创建全新的独立分支</h2><p>如果希望创建全新的独立分支，例如用于文档管理，则还需要进行如下删除操作<br>注意如果有不在索引中的文件，则需要手工删除(包括.gitignore)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#删除此分支中的索引及索引中的所有文件</span></span><br><span class="line"><span class="variable">$git</span> rm -rf .</span><br></pre></td></tr></table></figure>
-<h2 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h2><p>当前独立分支还需要创建git索引并initial commit后才能正常工作</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&lt;<span class="keyword">do</span> your work&gt;</span><br><span class="line"><span class="comment">#创建git索引</span></span><br><span class="line"><span class="variable">$git</span> add .</span><br><span class="line"><span class="comment">#initial commit</span></span><br><span class="line"><span class="variable">$git</span> commit <span class="_">-a</span> -m <span class="string">"initial commit"</span></span><br><span class="line"><span class="comment">#push到远端仓库</span></span><br><span class="line"><span class="variable">$git</span> push origin 新分支名</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有sublayer的alpha通道从而精确的计算出阴影的轮廓，这是非常消耗性能的，从而导致了动画的卡顿。</p>
+<p>为了尽可能地减小离屏渲染带来的性能影响，我们可以利用CALayer的另外一个属性shadowPath，这个属性的官方文档是这么描述的：</p>
+<blockquote>
+<p>If you specify a value for this property, the layer creates its shadow using the specified path instead of the layer’s composited alpha channel. The path you provide defines the outline of the shadow. It is filled using the non-zero winding rule and the current shadow color, opacity, and blur radius.</p>
+</blockquote>
+<p>可以看到设置了这个属性以后CALayer在创建其shadow的时候不在遍历sublayer的alpha通道，而是直接用这个属性所指定的路径作为阴影的轮廓，这样就减少了非常多的计算量。</p>
+<a id="more"></a>
+<p>然而这里会有一个问题，shadowPath并不会跟随CALayer的bounds属性进行变化，所以在layer的bounds产生变化以后需要手动更新shadowPath才能让其适配新的bounds。</p>
+<p>为了解决这个问题，在使用AutoLayout以前，因为bounds都是手动计算出来的，我们可以很容易的直接设定新的shadowPath，而使用了AutoLayout以后，我们则只能在UIView的<code>layoutSubivews</code>方法中才能获得更新后的bounds。</p>
+<p>而且文档中还做了如下描述：</p>
+<blockquote>
+<p>Unlike most animatable properties, this property (as with all CGPathRef animatable properties) does not support implicit animation. </p>
+</blockquote>
+<p>这说明该变量是不支持隐式动画的，也就是说当我们直接设置CALayer的shadowPath属性后，系统并不会自动的提交隐式的CATransaction动画。</p>
+<p>为了解决了这个问题，我们需要通过CATransaction显示地指定shadowPath的动画效果，同时为了和bounds的动画效果保持一致，我们需要获取bounds的动画属性。</p>
+<p>考虑了以上两点问题以后，我们就可以用如下方法实现让CALayer的shadowPath属性跟随bounds属性一起做动画改变。</p>
+<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><p>为实现本文的思路，我们需要创建一个一个UIView的子类并且重写其<code>layoutSubivew</code>方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Subclass of UIView</span></span><br><span class="line">- (<span class="keyword">void</span>)layoutSubviews &#123;</span><br><span class="line">    [<span class="keyword">super</span> layoutSubviews];</span><br><span class="line">    <span class="comment">// 获取CALayer的bounds属性的隐式动画属性</span></span><br><span class="line">    <span class="built_in">CAAnimation</span> *animation = [<span class="keyword">self</span>.layer animationForKey:<span class="string">@"bounds.size"</span>];</span><br><span class="line">    <span class="keyword">if</span> (animation) &#123;</span><br><span class="line">        <span class="comment">// 为shadowPath属性显示创建一个CATransaction操作</span></span><br><span class="line">        [<span class="built_in">CATransaction</span> begin];</span><br><span class="line">        <span class="comment">// 设置用获取到的bounds动画属性设置相关参数</span></span><br><span class="line">        [<span class="built_in">CATransaction</span> setAnimationDuration:animation.duration];</span><br><span class="line">        [<span class="built_in">CATransaction</span> setAnimationTimingFunction:animation.timingFunction];</span><br><span class="line">        <span class="comment">// 通过CABasicAnimation类来为shadowPath添加动画，当该CABasicAnimation的所有属性都为nil时</span></span><br><span class="line">        <span class="comment">// 其会选择从shadowPath的原值动画过渡至新值</span></span><br><span class="line">        <span class="built_in">CABasicAnimation</span> *shadowPathAnimation = [<span class="built_in">CABasicAnimation</span> animationWithKeyPath:<span class="string">@"shadowPath"</span>];</span><br><span class="line">        <span class="comment">// 将动画添加至layer的渲染树</span></span><br><span class="line">        [<span class="keyword">self</span>.layer addAnimation:shadowPathAnimation forKey:<span class="string">@"shadowPath"</span>];</span><br><span class="line">        [<span class="built_in">CATransaction</span> commit];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">self</span>.layer.shadowPath = [<span class="built_in">UIBezierPath</span> bezierPathWithRect:<span class="keyword">self</span>.layer.bounds].CGPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
 
       
     </div>
@@ -394,7 +402,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag">#Git</a>
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
           
         </div>
       
@@ -403,17 +411,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2016/09/26/get-topmost-view-controller/" rel="next" title="获取当前最顶层的ViewController">
+                <i class="fa fa-chevron-left"></i> 获取当前最顶层的ViewController
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/" rel="prev" title="管理linux下软件的配置文件dotfile(rc files)">
-                管理linux下软件的配置文件dotfile(rc files) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -427,10 +431,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/08/12/create-orphan-git-branch/"
-     data-title="创建Git独立分支"
+        <div class="ds-share flat" data-thread-key="2016/09/26/shadow-path-animation/"
+     data-title="让CALayer的shadowPath属性跟随bounds属性一起做动画改变"
      data-content=""
-     data-url="http://wty.im/2015/08/12/create-orphan-git-branch/">
+     data-url="http://wty.im/2016/09/26/shadow-path-animation/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -457,8 +461,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/12/create-orphan-git-branch/"
-           data-title="创建Git独立分支" data-url="http://wty.im/2015/08/12/create-orphan-git-branch/">
+      <div class="ds-thread" data-thread-key="2016/09/26/shadow-path-animation/"
+           data-title="让CALayer的shadowPath属性跟随bounds属性一起做动画改变" data-url="http://wty.im/2016/09/26/shadow-path-animation/">
       </div>
     
   </div>
@@ -600,7 +604,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过带orphan参数的checkout命令建立独立分支"><span class="nav-number">1.</span> <span class="nav-text">通过带orphan参数的checkout命令建立独立分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建全新的独立分支"><span class="nav-number">2.</span> <span class="nav-text">创建全新的独立分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始工作"><span class="nav-number">3.</span> <span class="nav-text">开始工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方法"><span class="nav-number">2.</span> <span class="nav-text">实现方法</span></a></li></ol></div>
             
           </div>
         </section>

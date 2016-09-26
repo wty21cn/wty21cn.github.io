@@ -282,6 +282,144 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/26/shadow-path-animation/" itemprop="url">
+                  让CALayer的shadowPath属性跟随bounds属性一起做动画改变
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-26T19:00:22+08:00" content="2016-09-26">
+              2016-09-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/26/shadow-path-animation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/26/shadow-path-animation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/26/shadow-path-animation/" class="leancloud_visitors" data-flag-title="让CALayer的shadowPath属性跟随bounds属性一起做动画改变">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在iOS开发中，我们经常需要给视图添加阴影效果，最简单的方法就是通过设置CALayer的shadowColor、shadowOpacity、shadowOffset和shadowRadius这几个属性可以很方便的为 UIView 添加阴影效果。但是如果单用这几个属性会导致离屏渲染(Offscreen Rendering)，而且CoreAnimation在每一帧绘制阴影的时候都需要递归遍历所有sublayer的alpha通道从而精确的计算出阴影的轮廓，这是非常消耗性能的，从而导致了动画的卡顿。</p>
+<p>为了尽可能地减小离屏渲染带来的性能影响，我们可以利用CALayer的另外一个属性shadowPath，这个属性的官方文档是这么描述的：</p>
+<blockquote>
+<p>If you specify a value for this property, the layer creates its shadow using the specified path instead of the layer’s composited alpha channel. The path you provide defines the outline of the shadow. It is filled using the non-zero winding rule and the current shadow color, opacity, and blur radius.</p>
+</blockquote>
+<p>可以看到设置了这个属性以后CALayer在创建其shadow的时候不在遍历sublayer的alpha通道，而是直接用这个属性所指定的路径作为阴影的轮廓，这样就减少了非常多的计算量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/26/shadow-path-animation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+       
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/09/26/get-topmost-view-controller/" itemprop="url">
                   获取当前最顶层的ViewController
                 </a>
@@ -1504,7 +1642,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
