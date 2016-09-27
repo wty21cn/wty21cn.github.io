@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
+    
+    <lastmod>2016-09-27T17:34:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</loc>
     
     <lastmod>2016-09-26T13:06:51.000Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://wty.im/2015/09/22/iOS9-ATS-Feature-and-enable-insecure-http-connection-in-xcode7/</loc>
     
     <lastmod>2016-09-26T13:05:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
-    
-    <lastmod>2016-09-26T13:04:40.000Z</lastmod>
     
   </url>
   

@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
+    <lastmod>2016-09-27T17:34:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>让CALayer的shadowPath跟随bounds一起做动画改变</title>
+        <pubTime>2016-09-26T11:00:22.000Z</pubTime>
+        
+        <tag>iOS开发</tag>
+         
+         
+           
+             
+              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://wty.im/2015/08/14/use-rcm-to-manage-your-dotfile-rc-file/</loc>
     <lastmod>2016-09-26T13:06:51.000Z</lastmod>
     <data>
@@ -146,26 +166,6 @@
         <tag>Xcode7</tag>
          
         <tag>iOS9</tag>
-         
-         
-           
-             
-              <breadCrumb title="iOS" url="http://wty.im/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://wty.im/2016/09/26/let-shadow-path-animate-with-layer-bounds/</loc>
-    <lastmod>2016-09-26T13:04:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>让CALayer的shadowPath跟随bounds一起做动画改变</title>
-        <pubTime>2016-09-26T11:00:22.000Z</pubTime>
-        
-        <tag>iOS开发</tag>
          
          
            
